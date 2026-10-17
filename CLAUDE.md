@@ -1,0 +1,53 @@
+# Dialectica: working conventions
+
+A static, bilingual (EN/中文) atlas of philosophy: 8 traditions, 72 schools, 204 thinkers, the links between schools
+and the ties between thinkers. Repository: github.com/geekplux/dialectica. Sibling projects: Art-isms, Worldlines.
+Read README.md for the data model and file layout. These are the rules that are easy to break.
+
+## No build step
+
+- The site is plain HTML, CSS and JavaScript in `public/`, deployed as-is. Do not add a bundler, framework,
+  package.json or build command unless the owner agrees first.
+- Everything deployable lives in `public/`; nothing else is uploaded. Scripts in `scripts/` are dev-time
+  tools (Node 22, no dependencies).
+- Serve locally with `python3 -m http.server 8000 --directory public` (or `npx wrangler dev`).
+
+## Content
+
+- Content is in `public/data/` (`window.DIALECTICA`): `core.js`, `schools.js`, `thinkers.js`, `links.js`. Every piece of
+  text is `{ "en": "…", "zh": "…" }`, both non-empty. Add new text in both languages in the same change.
+- English is the default language and `/` is always the English page; Chinese is `/?lang=zh`. Do not switch
+  language from the browser's locale.
+- One language at a time: the English view shows no Chinese (the 中文 button is the one exception), and the Chinese
+  view shows no English subtitles.
+- Philosophy is argued about; the atlas should not take sides. State a school's view as its view, and contested
+  claims (dates, attributions, influence) as contested. If a fact can't be verified, list it in `docs/` for the
+  owner; don't silently "fix" it. Open items are in `docs/open-questions-2026-10.md`.
+- A link or tie must be historically real: a documented teacher, a text someone read, a critique someone wrote.
+  Parallels between traditions that never met are not links.
+- The counts quoted in `index.html` (schools, thinkers, traditions) must match the data; `check-data` fails otherwise.
+
+## Design
+
+- Mondrian carries meaning: colour = tradition, a block = a school, a square = a thinker; solid ink, dashed red and
+  dotted blue lines are the three kinds of link. Everything else stays paper and ink. Prefer removing emphasis to adding it.
+- Hairlines inside sections; heavy rules only between sections.
+- Check every change at desktop width and at 390px, in both languages: no horizontal page scroll, no console errors.
+
+## Analytics and privacy
+
+- GA4 is wired as in Worldlines (Consent Mode v2, denied by default, host-only cookies, `pageView()` after render,
+  `track()` a no-op without `gtag`) but stays off until `GA_ID` in `index.html` is set. Never send typed search text
+  or personal data in event parameters.
+
+## Before every commit
+
+1. `node scripts/stamp-assets.mjs` if `public/assets/app.js` or `styles.css` changed.
+2. `node scripts/check-data.mjs` (CI runs it too).
+3. Open the page at desktop width and at 390px, in both languages.
+
+## Caching and deployment
+
+- Cloudflare Workers Static Assets, configured in `wrangler.jsonc`; Workers Builds deploys `master` on push.
+- `public/_headers` caches `assets/` for a year. That is only safe because every reference has a `?v=<content hash>`.
+- One commit per logical change, with a message that says why.
