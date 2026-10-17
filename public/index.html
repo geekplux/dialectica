@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dialectica: a family tree of philosophy, East and West</title>
+<meta name="description" content="A Mondrian-style atlas of philosophy. Follow 72 schools and 204 thinkers across 8 traditions and 3,000 years: where each idea came from, the argument behind it, who taught and who answered whom. In English and Chinese.">
+<link rel="canonical" href="https://dialectica.geekplux.org/">
+<link rel="alternate" hreflang="en" href="https://dialectica.geekplux.org/">
+<link rel="alternate" hreflang="zh-Hans" href="https://dialectica.geekplux.org/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://dialectica.geekplux.org/">
+<meta name="theme-color" content="#fffdf7">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dialectica">
+<meta property="og:url" content="https://dialectica.geekplux.org/">
+<meta property="og:title" content="Dialectica: a family tree of philosophy, East and West">
+<meta property="og:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from, the reasoning behind it, and who answered whom. In English and Chinese.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dialectica: a family tree of philosophy, East and West">
+<meta name="twitter:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from and who answered whom.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Dialectica",
+  "alternateName": "思辨谱",
+  "url": "https://dialectica.geekplux.org/",
+  "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
+  "inLanguage": ["en", "zh-Hans"],
+  "isAccessibleForFree": true,
+  "about": [{ "@type": "Thing", "name": "Philosophy" }, { "@type": "Thing", "name": "History of ideas" }, { "@type": "Thing", "name": "Comparative philosophy" }],
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "creator": { "@type": "Person", "name": "geekplux", "url": "https://github.com/geekplux" },
+  "codeRepository": "https://github.com/geekplux/dialectica"
+}
+</script>
+<script>
+/* Google Analytics 4 with Consent Mode v2, on the production domain only, and only once GA_ID is set.
+   Until the visitor accepts in the consent bar (assets/app.js), analytics_storage stays "denied".
+   cookie_domain "none" keeps the cookies host-only, and app.js sends the page_view after render. */
+(function () {
+  var GA_ID = "";
+  if (!GA_ID || location.hostname !== "dialectica.geekplux.org") return;
+  var choice = null;
+  try { choice = localStorage.getItem("dialectica-consent"); } catch (e) { /* storage blocked */ }
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: choice === "granted" ? "granted" : "denied" });
+  gtag("js", new Date());
+  gtag("config", GA_ID, { send_page_view: false, cookie_domain: "none" });
+  var s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+  document.head.appendChild(s);
+})();
+</script>
+<link rel="stylesheet" href="assets/styles.css?v=e259310d21">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap pad">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="10" height="13" fill="#d52b1e"/><rect x="14" y="2" width="10" height="6" fill="#fffdf7"/><rect x="14" y="10" width="10" height="14" fill="#1d4ed8"/><rect x="2" y="17" width="10" height="7" fill="#f3c623"/></svg>
+      <span data-i18n="brand">Dialectica</span>
+    </a>
+    <nav class="nav" aria-label="Sections" data-i18n-aria="ariaSections">
+      <a href="#lineage" data-i18n="navLineage">Lineage</a>
+      <a href="#thinkers" data-i18n="navThinkers">Thinkers</a>
+      <a href="#questions" data-i18n="navQuestions">Questions</a>
+      <a href="#schools" data-i18n="navSchools">Schools</a>
+      <a href="#learn" data-i18n="navLearn">How to read</a>
+    </nav>
+    <button type="button" class="search-btn" id="search-open"><span data-i18n="search">Search</span> <kbd>/</kbd></button>
+    <a class="gh-star" id="gh-star" href="https://github.com/geekplux/dialectica" target="_blank" rel="noopener" aria-label="Star Dialectica on GitHub" data-i18n-aria="starTitle" title="Star Dialectica on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span data-i18n="star">Star</span></a>
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="ariaLang">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="masthead">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i18n="kicker">A family tree of philosophy, East and West</p>
+      <div>
+        <h1 aria-label="Dialectica" data-i18n-aria="brand"><span data-i18n="h1a" aria-hidden="true">DIALEC</span><span class="red" data-i18n="h1b" aria-hidden="true">TICA</span></h1>
+        <p class="hero-dek" data-i18n-html="dek">Every idea is <strong>an answer to an older one</strong>. Follow the arguments: who inherited them, who turned against them, and why.</p>
+      </div>
+      <div class="hero-meta">
+        <span id="stats"></span>
+        <a class="scroll-cue" href="#lineage" data-i18n="cue">Begin with the family tree</a>
+      </div>
+    </div>
+    <div class="hero-graphic" aria-hidden="true">
+      <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
+        <rect width="400" height="520" fill="#fffdf7"/>
+        <rect x="0" y="0" width="150" height="190" fill="#d52b1e"/>
+        <rect x="262" y="0" width="138" height="96" fill="#f3c623"/>
+        <rect x="262" y="250" width="138" height="150" fill="#1d4ed8"/>
+        <rect x="0" y="404" width="96" height="116" fill="#f3c623"/>
+        <rect x="160" y="404" width="96" height="116" fill="#141414"/>
+        <rect x="150" y="96" width="112" height="60" fill="#e9e4d8"/>
+        <g fill="#141414">
+          <rect x="146" y="0" width="10" height="520"/>
+          <rect x="256" y="0" width="10" height="520"/>
+          <rect x="0" y="186" width="156" height="10"/>
+          <rect x="146" y="92" width="254" height="8"/>
+          <rect x="146" y="246" width="254" height="10"/>
+          <rect x="0" y="400" width="400" height="10"/>
+          <rect x="92" y="400" width="8" height="120"/>
+          <rect x="146" y="320" width="120" height="8"/>
+        </g>
+      </svg>
+      <p class="graphic-caption" data-i18n="heroCap">Thesis. Objection. Reply. The conversation is 3,000 years long.</p>
+    </div>
+  </section>
+
+  <section class="manifesto" aria-label="How to read the atlas" data-i18n-aria="ariaManifesto">
+    <div><b data-i18n="m1t">Read → across</b><p data-i18n="m1">Each lane is a tradition and time runs left to right. A block is a school, as long as it lasted.</p></div>
+    <div><b data-i18n="m2t">Follow ⤳ a line</b><p data-i18n="m2">Solid lines carry an idea forward. Dashed red lines argue against it. Dotted blue lines cross between traditions.</p></div>
+    <div><b data-i18n="m3t">Ask ? a question</b><p data-i18n="m3">Put one question to every tradition, and read their answers side by side.</p></div>
+  </section>
+
+  <noscript>
+    <section class="noscript">
+      <h2>The atlas needs JavaScript</h2>
+      <p>Dialectica draws its family tree in the browser. Turn on JavaScript to follow 72 schools and 204 thinkers across eight traditions: China and East Asia, India, Greece and Rome, the Islamic world, medieval Europe, early modern Europe, Continental philosophy, and analytic philosophy and pragmatism.</p>
+    </section>
+  </noscript>
+
+  <section class="view" id="lineage">
+    <header class="sec-intro">
+      <p class="sec-no" data-i18n="linNo">01 · Lineage</p>
+      <h2 data-i18n="linTitle">The family tree of ideas</h2>
+      <div class="sec-note"><p class="range" id="lin-range"></p><p data-i18n="linLede">Each block is a school, drawn for as long as it lasted. Lines show what passed between them. Select a school to light up where it came from and what it led to.</p></div>
+    </header>
+    <div class="view-bar">
+      <div class="ctl">
+        <span class="micro" data-i18n="traceLbl">Trace</span>
+        <div class="seg" role="group" id="trace-seg">
+          <button type="button" data-trace="near" data-i18n="traceNear">Direct links</button>
+          <button type="button" data-trace="all" data-i18n="traceAll">Whole lineage</button>
+        </div>
+      </div>
+      <div class="legend" id="link-legend"></div>
+      <div class="zoom" role="group" aria-label="Zoom" data-i18n-aria="zoom">
+        <button type="button" data-zoom="-1" aria-label="Zoom out" data-i18n-aria="zoomOut">−</button>
+        <span id="zoom-val">1×</span>
+        <button type="button" data-zoom="1" aria-label="Zoom in" data-i18n-aria="zoomIn">+</button>
+      </div>
+      <div class="theme-bar" id="branch-bar" role="group" aria-label="Filter by branch" data-i18n-aria="ariaBranches"></div>
+    </div>
+    <div class="gx-scroll drag-x" id="lin-scroll"><div class="gx" id="lin"></div></div>
+  </section>
+
+  <section class="view" id="thinkers">
+    <header class="sec-intro">
+      <p class="sec-no" data-i18n="thNo">02 · Thinkers</p>
+      <h2 data-i18n="thTitle">Who taught, read and argued with whom</h2>
+      <div class="sec-note"><p class="range" id="th-range"></p><p data-i18n="thLede">Each square is a thinker, placed at about the age of forty. Lines join teachers to students, readers to the books that shaped them, and critics to their targets.</p></div>
+    </header>
+    <div class="view-bar">
+      <div class="ctl">
+        <span class="micro" data-i18n="tiesLbl">Show</span>
+        <div class="seg" role="group" id="tie-seg"></div>
+      </div>
+      <p class="view-hint" data-i18n="thHelp">Hover to see a thinker’s circle · select to open their page</p>
+    </div>
+    <div class="gx-scroll drag-x" id="th-scroll"><div class="gx" id="th"></div></div>
+  </section>
+
+  <section class="view" id="questions">
+    <header class="sec-intro">
+      <p class="sec-no" data-i18n="qNo">03 · Questions</p>
+      <h2 data-i18n="qTitle">One question, many answers</h2>
+      <div class="sec-note"><p class="range" id="q-range"></p><p data-i18n="qLede">Philosophy is easiest to compare at the level of its questions. Pick one and read how each tradition answered it, in order of time.</p></div>
+    </header>
+    <div class="q-tabs" id="q-tabs" role="tablist" aria-label="Questions" data-i18n-aria="ariaQuestions"></div>
+    <div class="q-head" id="q-head"></div>
+    <div class="q-map" id="q-map" aria-hidden="true"></div>
+    <ol class="q-grid" id="q-grid"></ol>
+  </section>
+
+  <section class="view" id="schools">
+    <header class="sec-intro">
+      <p class="sec-no" data-i18n="sNo">04 · Schools</p>
+      <h2 data-i18n="sTitle">Every school, by tradition</h2>
+      <div class="sec-note"><p class="range" id="s-range"></p><p data-i18n="sLede">An index of the whole atlas. Each entry opens the school’s page: the question it asked, why it arose, the reasoning behind it, its people and its books.</p></div>
+    </header>
+    <div class="s-index" id="s-index"></div>
+  </section>
+
+  <section class="learning" id="learn">
+    <div class="wrap pad">
+      <h2 data-i18n="learnTitle">How to read philosophy without getting lost.</h2>
+      <ol class="learning-grid" id="learning"></ol>
+      <p class="footer-note" data-i18n="learnNote">This atlas is a map, not the territory: a deliberately selective set of schools, thinkers and lines of influence. Every line is a simplification of conversations that ran for generations.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap pad">
+    <div>
+      <h3 data-i18n="fDatesT">About the dates</h3>
+      <p data-i18n="fDates">Schools rarely begin or end in a single year, and many ancient dates, especially in India and early China, are traditional or disputed. The blocks show conventional spans; the panels say when a date is uncertain.</p>
+    </div>
+    <div>
+      <h3 data-i18n="fImgT">About the images</h3>
+      <p data-i18n="fImg">Portraits are the lead images of English Wikipedia articles, shown only when the file is on Wikimedia Commons. Every panel links to its source; check the file page before reusing an image.</p>
+    </div>
+    <div>
+      <h3 data-i18n="fProjT">The project</h3>
+      <p data-i18n-html="fProj">A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.org/">Art-isms</a> and <a href="https://worldlines.geekplux.org/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.</p>
+      <p><button type="button" class="linkish" id="consent-open" data-i18n="cookieSettings" hidden>Cookie settings</button></p>
+    </div>
+  </div>
+</footer>
+
+<div class="consent" id="consent" role="region" aria-labelledby="consent-text" hidden>
+  <p id="consent-text" data-i18n="consentText">This site uses Google Analytics to count visits. Allow it to set analytics cookies?</p>
+  <div class="consent-actions">
+    <button type="button" class="btn solid" data-consent="granted" data-i18n="consentYes">Accept</button>
+    <button type="button" class="btn" data-consent="denied" data-i18n="consentNo">Decline</button>
+  </div>
+</div>
+
+<aside class="detail" id="detail" role="dialog" aria-modal="false" aria-labelledby="d-title" aria-hidden="true">
+  <div class="detail-top"><span id="detail-kind"></span><button type="button" class="x" id="detail-close" aria-label="Close" data-i18n-aria="close">×</button></div>
+  <div class="detail-body" id="detail-body"></div>
+</aside>
+
+<section class="search" id="search" role="dialog" aria-modal="true" aria-label="Search" data-i18n-aria="search" aria-hidden="true">
+  <div class="search-wrap">
+    <div class="search-head"><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="Search philosophy…"><button type="button" class="x big" id="search-close" aria-label="Close" data-i18n-aria="close">×</button></div>
+    <p class="search-help" data-i18n="searchHelp">Try “virtue”, “emptiness”, “Kant”, “the self” or a book title. Press Esc to close.</p>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</section>
+
+<div class="tip" id="tip" hidden></div>
+
+<script src="data/core.js"></script>
+<script src="data/schools.js"></script>
+<script src="data/thinkers.js"></script>
+<script src="data/links.js"></script>
+<script src="assets/app.js?v=78cb7462e1"></script>
+</body>
+</html>
