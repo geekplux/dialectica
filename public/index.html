@@ -58,7 +58,7 @@
   document.head.appendChild(s);
 })();
 </script>
-<link rel="stylesheet" href="assets/styles.css?v=be52804b86">
+<link rel="stylesheet" href="assets/styles.css?v=cb7601e425">
 </head>
 <body>
 <header class="topbar">
@@ -70,6 +70,7 @@
     <nav class="nav" aria-label="Sections" data-i18n-aria="ariaSections">
       <a href="#lineage" data-i18n="navLineage">Lineage</a>
       <a href="#thinkers" data-i18n="navThinkers">Thinkers</a>
+      <a href="#crossings" data-i18n="navCrossings">Crossings</a>
       <a href="#questions" data-i18n="navQuestions">Questions</a>
       <a href="#schools" data-i18n="navSchools">Schools</a>
       <a href="#learn" data-i18n="navLearn">How to read</a>
@@ -156,9 +157,21 @@
     <div class="gx-scroll drag-x" id="th-scroll"><div class="gx" id="th"></div></div>
   </section>
 
+  <section class="view" id="crossings">
+    <header class="sec-intro">
+      <p class="sec-no" data-i18n="cxNo">03 · Crossings</p>
+      <h2 data-i18n="cxTitle">Where traditions met</h2>
+      <div class="sec-note"><p class="range" id="cx-range"></p><p data-i18n="cxLede">Read a row to see what a tradition gave away, a column to see what it took in. Each square counts the schools and thinkers that crossed; select one to read how.</p></div>
+    </header>
+    <div class="cx">
+      <div class="cx-matrix" id="cx-matrix" role="grid" aria-label="Crossings between traditions" data-i18n-aria="ariaCrossings"></div>
+      <div class="cx-story" id="cx-story" aria-live="polite"></div>
+    </div>
+  </section>
+
   <section class="view" id="questions">
     <header class="sec-intro">
-      <p class="sec-no" data-i18n="qNo">03 · Questions</p>
+      <p class="sec-no" data-i18n="qNo">04 · Questions</p>
       <h2 data-i18n="qTitle">One question, many answers</h2>
       <div class="sec-note"><p class="range" id="q-range"></p><p data-i18n="qLede">Philosophy is easiest to compare at the level of its questions. Pick one and read how each tradition answered it, in order of time.</p></div>
     </header>
@@ -170,7 +183,7 @@
 
   <section class="view" id="schools">
     <header class="sec-intro">
-      <p class="sec-no" data-i18n="sNo">04 · Schools</p>
+      <p class="sec-no" data-i18n="sNo">05 · Schools</p>
       <h2 data-i18n="sTitle">Every school, by tradition</h2>
       <div class="sec-note"><p class="range" id="s-range"></p><p data-i18n="sLede">An index of the whole atlas. Each entry opens the school’s page: the question it asked, why it arose, the reasoning behind it, its people and its books.</p></div>
     </header>
@@ -231,6 +244,6 @@
 <script src="data/schools.js"></script>
 <script src="data/thinkers.js"></script>
 <script src="data/links.js"></script>
-<script src="assets/app.js?v=d62decc070"></script>
+<script src="assets/app.js?v=f6d879f7b3"></script>
 </body>
 </html>

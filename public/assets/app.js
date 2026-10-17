@@ -18,7 +18,7 @@
     en: {
       docTitle: "Dialectica: a family tree of philosophy, East and West",
       docDesc: () => `A Mondrian-style atlas of philosophy. Follow ${SC.length} schools and ${TK.length} thinkers across ${TR.length} traditions and 3,000 years: where each idea came from, the argument behind it, who taught and who answered whom. In English and Chinese.`,
-      brand: "Dialectica", navLineage: "Lineage", navThinkers: "Thinkers", navQuestions: "Questions", navSchools: "Schools", navLearn: "How to read", search: "Search",
+      brand: "Dialectica", navLineage: "Lineage", navThinkers: "Thinkers", navCrossings: "Crossings", navQuestions: "Questions", navSchools: "Schools", navLearn: "How to read", search: "Search",
       star: "Star", starTitle: "Star Dialectica on GitHub",
       kicker: "A family tree of philosophy, East and West",
       h1a: "DIALEC", h1b: "TICA",
@@ -36,16 +36,24 @@
       linRange: () => `1000 BCE → today · ${SC.length} schools · ${LK.length} lines`,
       traceLbl: "Trace", traceNear: "Direct links", traceAll: "Whole lineage",
       branchLbl: "Branch", allBranches: "All branches",
-      lk: { dev: "carries an idea forward", react: "argues against", fuse: "crosses traditions" },
+      /* Edges read in the direction the idea travelled, A → B: these say what B did with it */
+      lk: { dev: "carried forward", react: "answered with a critique", fuse: "borrowed across traditions" },
       thNo: "02 · Thinkers", thTitle: "Who taught, read and argued with whom",
       thLede: "Each square is a thinker, placed at about the age of forty. Lines join teachers to students, readers to the books that shaped them, and critics to their targets.",
       thRange: () => `${TK.length} thinkers · ${TI.length} relationships`,
       tiesLbl: "Show", thHelp: "Hover to see a thinker’s circle · select to open their page",
       tie: { taught: "taught", infl: "influenced", opp: "argued against" },
-      qNo: "03 · Questions", qTitle: "One question, many answers",
+      tieEdge: { taught: "taught", infl: "influenced", opp: "answered with a critique" },
+      cxNo: "03 · Crossings", cxTitle: "Where traditions met",
+      cxLede: "Read a row to see what a tradition gave away, a column to see what it took in. Each square counts the schools and thinkers that crossed; select one to read how.",
+      cxRange: (a, b) => `${a} school links and ${b} thinker ties cross a border`,
+      cxFrom: "From ↓", cxTo: "To →", cxWithin: "within", cxSchools: "Schools", cxPeople: "Thinkers", cxBack: "The other way",
+      cxCount: (a, b) => `${a} school link${a === 1 ? "" : "s"} · ${b} thinker tie${b === 1 ? "" : "s"}`,
+      cxNone: "Nothing in the atlas crossed this way.", ariaCrossings: "Crossings between traditions",
+      qNo: "04 · Questions", qTitle: "One question, many answers",
       qLede: "Philosophy is easiest to compare at the level of its questions. Pick one and read how each tradition answered it, in order of time.",
       qRange: () => `${QS.length} questions · ${ANSWERS} answers`,
-      sNo: "04 · Schools", sTitle: "Every school, by tradition",
+      sNo: "05 · Schools", sTitle: "Every school, by tradition",
       sLede: "An index of the whole atlas. Each entry opens the school’s page: the question it asked, why it arose, the reasoning behind it, its people and its books.",
       sRange: () => `${SC.length} schools in ${TR.length} traditions`,
       nSchools: (n) => `${n} school${n === 1 ? "" : "s"}`, nThinkers: (n) => `${n} thinker${n === 1 ? "" : "s"}`,
@@ -78,7 +86,7 @@
     zh: {
       docTitle: "思辨谱：东西方哲学的家族谱系",
       docDesc: () => `蒙德里安风格的哲学图谱。沿着${TR.length}个传统、三千年的时间，追踪${SC.length}个学派与${TK.length}位思想家：每种思想从哪里来、背后的道理是什么、谁师承谁、谁又反驳了谁。中英双语。`,
-      brand: "思辨谱", navLineage: "谱系", navThinkers: "思想家", navQuestions: "问题", navSchools: "学派", navLearn: "阅读方法", search: "搜索",
+      brand: "思辨谱", navLineage: "谱系", navThinkers: "思想家", navCrossings: "交汇", navQuestions: "问题", navSchools: "学派", navLearn: "阅读方法", search: "搜索",
       star: "星标", starTitle: "在 GitHub 上给思辨谱加星标",
       kicker: "一部东西方哲学的家族谱系",
       h1a: "思辨", h1b: "谱",
@@ -96,16 +104,23 @@
       linRange: () => `公元前1000年 → 今天 · ${SC.length}个学派 · ${LK.length}条线索`,
       traceLbl: "追溯", traceNear: "直接关联", traceAll: "整条谱系",
       branchLbl: "分支", allBranches: "全部分支",
-      lk: { dev: "继承发展", react: "批判反对", fuse: "跨传统吸收" },
+      lk: { dev: "继承发展", react: "以批判回应", fuse: "跨传统吸收" },
       thNo: "02 · 思想家", thTitle: "谁师承谁，谁读过谁，谁又反驳了谁",
       thLede: "每个方块是一位思想家，大致放在他们四十岁的位置。连线把老师与学生、读者与塑造他们的著作、批评者与其对象连在一起。",
       thRange: () => `${TK.length}位思想家 · ${TI.length}条关系`,
       tiesLbl: "显示", thHelp: "悬停查看一位思想家的关系圈 · 点击打开详情",
       tie: { taught: "师承", infl: "影响", opp: "论敌" },
-      qNo: "03 · 问题", qTitle: "同一个问题，许多种回答",
+      tieEdge: { taught: "师承", infl: "影响", opp: "以批判回应" },
+      cxNo: "03 · 交汇", cxTitle: "传统在哪里相遇",
+      cxLede: "横着读一行，看一个传统输出了什么；竖着读一列，看它吸收了什么。方块的大小是跨越边界的学派与思想家的数量；点选一个，读它们是怎样相遇的。",
+      cxRange: (a, b) => `${a}条学派影响与${b}条人物关系跨越了传统的边界`,
+      cxFrom: "从 ↓", cxTo: "到 →", cxWithin: "内部", cxSchools: "学派", cxPeople: "思想家", cxBack: "反方向",
+      cxCount: (a, b) => `${a}条学派影响 · ${b}条人物关系`,
+      cxNone: "本图谱中没有沿这个方向的跨越。", ariaCrossings: "传统之间的交汇",
+      qNo: "04 · 问题", qTitle: "同一个问题，许多种回答",
       qLede: "在“问题”的层面上，哲学最容易比较。选一个问题，按时间顺序读各个传统怎样回答它。",
       qRange: () => `${QS.length}个问题 · ${ANSWERS}个回答`,
-      sNo: "04 · 学派", sTitle: "按传统排列的全部学派",
+      sNo: "05 · 学派", sTitle: "按传统排列的全部学派",
       sLede: "整部图谱的索引。每个条目都会打开学派详情：它提出的问题、产生的缘由、背后的道理、代表人物与代表著作。",
       sRange: () => `${TR.length}个传统中的${SC.length}个学派`,
       nSchools: (n) => `${n} 个学派`, nThinkers: (n) => `${n} 位思想家`,
@@ -524,7 +539,56 @@
     }).join("");
   }
 
-  /* ── 04 Schools index ──────────────────────── */
+  /* ── 03 Crossings ──────────────────────────────
+     A reorderable-matrix reading (after Bertin): rows give, columns receive. A square's area counts the school
+     links and thinker ties that crossed from one tradition into another; the diagonal counts those that stayed home. */
+  const CX = (() => {
+    const cell = {};
+    const get = (a, b) => (cell[a + ">" + b] = cell[a + ">" + b] || { links: [], ties: [] });
+    LK.forEach((l) => { const a = SCB[l.from], b = SCB[l.to]; if (a && b) get(a.tradition, b.tradition).links.push(l); });
+    TI.forEach((r) => { const a = TKB[r.from], b = TKB[r.to]; if (a && b) get(a.tradition, b.tradition).ties.push(r); });
+    const n = (c) => (c ? c.links.length + c.ties.length : 0);
+    let max = 0, links = 0, ties = 0;
+    for (const [k, c] of Object.entries(cell)) {
+      const [a, b] = k.split(">");
+      if (a === b) continue;
+      max = Math.max(max, n(c)); links += c.links.length; ties += c.ties.length;
+    }
+    return { at: (a, b) => cell[a + ">" + b], n, max, links, ties };
+  })();
+  let cx = { from: "indian", to: "eastasia" }, cxTouched = false;
+  function renderCrossings() {
+    $("#cx-range").textContent = t("cxRange")(CX.links, CX.ties);
+    let h = `<div class="cx-corner"><span>${esc(t("cxFrom"))}</span><span>${esc(t("cxTo"))}</span></div>`;
+    h += TR.map((b) => `<div class="cx-col" style="${trVars(b.id)}" title="${esc(p(b.name))}"><span>${esc(b.code)}</span></div>`).join("");
+    for (const a of TR) {
+      h += `<div class="cx-row" style="${trVars(a.id)}"><span class="code">${esc(a.code)}</span><span class="nm">${esc(p(a.name))}</span></div>`;
+      for (const b of TR) {
+        const c = CX.at(a.id, b.id), n = CX.n(c);
+        if (a.id === b.id) { h += `<div class="cx-cell self" title="${esc(p(a.name))} · ${esc(t("cxWithin"))}"><span>${n || ""}</span></div>`; continue; }
+        const size = n ? Math.max(30, Math.sqrt(n / CX.max) * 92) : 0;
+        const on = cx.from === a.id && cx.to === b.id;
+        h += `<button type="button" class="cx-cell${on ? " on" : ""}" data-cx="${a.id}>${b.id}" style="${trVars(a.id)}" aria-pressed="${on}" aria-label="${esc(p(a.name))} → ${esc(p(b.name))}: ${n}"${n ? "" : " disabled"}>` +
+          (n ? `<i style="width:${size.toFixed(1)}%;height:${size.toFixed(1)}%"><b>${n}</b></i>` : "") + `</button>`;
+      }
+    }
+    $("#cx-matrix").innerHTML = h;
+    renderCrossingStory();
+  }
+  function renderCrossingStory() {
+    const a = TRB[cx.from], b = TRB[cx.to], c = CX.at(cx.from, cx.to) || { links: [], ties: [] };
+    const back = CX.n(CX.at(cx.to, cx.from));
+    const tieWord = (r) => t("tieEdge")[r.kind];
+    $("#cx-story").innerHTML = `
+      <p class="cx-head"><span class="sw" style="${trVars(a.id)}"></span>${esc(p(a.name))} <b>→</b> <span class="sw" style="${trVars(b.id)}"></span>${esc(p(b.name))}</p>
+      <p class="micro">${esc(t("cxCount")(c.links.length, c.ties.length))}</p>
+      ${c.links.length ? `<div class="d-sec"><h3>${esc(t("cxSchools"))}</h3>${c.links.map((l) => `<button type="button" class="par" data-s="${l.to}"><span><i style="${trVars(a.id)}"></i>${esc(t("lk")[l.kind])}<br><i class="ln ${l.kind}" style="width:22px;margin-top:6px"></i></span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(SCB[l.from].name))} → ${esc(p(SCB[l.to].name))}</strong><em>${esc(p(l.note))}</em></span></button>`).join("")}</div>` : ""}
+      ${c.ties.length ? `<div class="d-sec"><h3>${esc(t("cxPeople"))}</h3>${c.ties.map((r) => `<button type="button" class="par" data-t="${r.to}"><span><i style="${trVars(a.id)}"></i>${esc(tieWord(r))}</span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(TKB[r.from].name))} → ${esc(p(TKB[r.to].name))}</strong>${r.note ? `<em>${esc(p(r.note))}</em>` : ""}</span></button>`).join("")}</div>` : ""}
+      ${!c.links.length && !c.ties.length ? `<p class="cx-none">${esc(t("cxNone"))}</p>` : ""}
+      ${back ? `<p class="d-links"><button type="button" data-cx="${b.id}>${a.id}">${esc(t("cxBack"))}: ${esc(p(b.name))} → ${esc(p(a.name))} (${back})</button></p>` : ""}`;
+  }
+
+  /* ── 05 Schools index ──────────────────────── */
   function renderIndex() {
     $("#s-index").innerHTML = TR.map((tr) => {
       const list = SC.filter((s) => s.tradition === tr.id);
@@ -786,7 +850,7 @@
     }
     if ((el = g(".hit[data-ti]"))) {
       const r = TI[+el.dataset.ti];
-      showTip(ev, `<span>${esc(t("tie")[r.kind])}</span><b>${esc(p(TKB[r.from].name))} → ${esc(p(TKB[r.to].name))}</b>${r.note ? esc(p(r.note)) : ""}`, MARKERS[r.kind]);
+      showTip(ev, `<span>${esc(t("tieEdge")[r.kind])}</span><b>${esc(p(TKB[r.from].name))} → ${esc(p(TKB[r.to].name))}</b>${r.note ? esc(p(r.note)) : ""}`, MARKERS[r.kind]);
       return;
     }
     hideTip();
@@ -860,6 +924,7 @@
     const q = new URLSearchParams();
     if (selected) q.set(selected.kind, selected.id);
     if (qIdx) q.set("q", QS[qIdx].id);
+    if (cxTouched) q.set("x", `${cx.from}.${cx.to}`);
     const h = q.toString();
     try { history.replaceState(null, "", location.pathname + location.search + (h ? "#" + h : "")); } catch (e) { /* sandboxed */ }
   }
@@ -869,6 +934,8 @@
     const q = new URLSearchParams(raw);
     const qi = QS.findIndex((x) => x.id === q.get("q"));
     if (qi >= 0) qIdx = qi;
+    const [xa, xb] = (q.get("x") || "").split(".");
+    if (TRB[xa] && TRB[xb] && xa !== xb) { cx = { from: xa, to: xb }; cxTouched = true; }
     if (SCB[q.get("s")]) return { kind: "s", id: q.get("s") };
     if (TKB[q.get("t")]) return { kind: "t", id: q.get("t") };
     return null;
@@ -888,6 +955,14 @@
       const item = selected && (selected.kind === "s" ? $(`.sb[data-s="${selected.id}"]`) : $(`.tn[data-t="${selected.id}"]`));
       sec.scrollIntoView({ behavior: smooth() });
       setTimeout(() => reveal(sec, item), 450);
+      return;
+    }
+    if ((el = g("[data-cx]"))) {
+      const [from, to] = el.dataset.cx.split(">");
+      cx = { from, to }; cxTouched = true;
+      track("select_content", { content_type: "crossing", item_id: el.dataset.cx });
+      renderCrossings(); writeHash();
+      if (!el.classList.contains("cx-cell")) $("#cx-story").scrollIntoView({ behavior: smooth(), block: "nearest" });
       return;
     }
     if ((el = g("[data-q]"))) {
@@ -959,6 +1034,7 @@
     /* A plain in-page anchor (#lineage, #top…) only scrolls: put the state back in the address */
     if (!location.hash.includes("=")) { writeHash(); return; }
     const target = readHash();
+    renderCrossings();
     renderQuestions();
     if (target) open(target);
   });
@@ -991,6 +1067,7 @@
     renderLineage();
     renderNetBar();
     renderNet();
+    renderCrossings();
     renderQuestions();
     renderIndex();
     renderLearning();
