@@ -1,0 +1,17 @@
+// Cloudflare Workers Static Assets: the site is plain files in ./public, no build step and no Worker script.
+// Workers Builds deploys it with `npx wrangler deploy` on every push to master.
+// Local preview: `npx wrangler dev` (or `python3 -m http.server 8000 --directory public`).
+{
+  "name": "dialectica",
+  "compatibility_date": "2026-10-12",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./public",
+    // /index.html is served at /, and unknown paths return a plain 404.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  // Pull-request builds run `npx wrangler preview`, which requires this block (it can stay empty).
+  // Previews live on workers.dev, so Google Analytics (production domain only) never runs there.
+  "previews": {}
+}
