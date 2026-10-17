@@ -621,7 +621,9 @@
     const box = $("#hero-art");
     const W = box.clientWidth, H = box.clientHeight;
     if (!W || !H) return;
-    const padX = W < 500 ? 18 : 30, top = 46, bottom = Math.min(H * 0.32, 170);
+    /* Leave the caption card its own room below the streets */
+    heroCaption(null);
+    const padX = W < 500 ? 18 : 30, top = 46, bottom = $("#hero-cap").offsetHeight + 24 + 38;
     const X = (y) => padX + fx(y) * (W - padX * 2);
     const gap = (H - top - bottom) / (TR.length - 1);
     const Y = {}, LINE = W < 500 ? 7 : 9;
@@ -682,7 +684,6 @@
     svg += names.join("");
     svg += `<text class="h-time" x="${padX}" y="${(H - bottom + 26).toFixed(1)}">${esc(fmtAxis(MIN_YEAR))}</text><text class="h-time end" x="${W - padX}" y="${(H - bottom + 26).toFixed(1)}">${esc(t("now"))} →</text></svg>`;
     box.innerHTML = svg;
-    heroCaption(null);
   }
   function heroCaption(el) {
     const cap = $("#hero-cap");
