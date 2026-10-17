@@ -2,22 +2,24 @@
 
 A bilingual (English / 中文) atlas of philosophy in the style of Mondrian. It draws the family tree of 72 schools and the network of 204 thinkers across eight traditions, from the Upanishads and the Hundred Schools to analytic philosophy, and shows where each idea came from, the reasoning behind it, who taught, read and argued with whom, and where traditions met.
 
-![Dialectica: the title beside the city of ideas, a Mondrian-style map of traditions and the ideas that crossed between them](public/og.png)
+![Dialectica: the title beside a Mondrian grid of philosophers' portraits, one from each tradition](public/og.png)
 
 **Live site:** https://dialectica.geekplux.org/ ([中文](https://dialectica.geekplux.org/?lang=zh)), once deployed.
 
-Where its sibling [Worldlines](https://worldlines.geekplux.org/) borrows the grids of Mondrian's 1920s, Dialectica takes its cue from his last paintings, *New York City I* and *Broadway Boogie-Woogie*: coloured lines that cross and weave. Colour always means tradition.
+Colour always means tradition. Where its sibling [Worldlines](https://worldlines.geekplux.org/) is all grids, Dialectica puts people in the grid and follows the lines between them.
 
-- **The city of ideas.** The hero is drawn from the data: each tradition is a street in its colour, every idea that crossed into another tradition is an upright landing on the street it reached, thinkers are small squares (tinted when they learned across a border), and the most connected schools are larger blocks. Hover to read what crossed; select to open it.
+- **Eight faces.** The hero is a Mondrian grid of portraits, one thinker from each tradition in the likeness their own century left of them, in black and white until you hover. A new eight is dealt on each visit.
 - **Lineage.** Every school is a block on a shared time axis, one lane per tradition, drawn for as long as it lasted. Lines join schools: solid when an idea is carried forward, dashed red when one school argues against another, dotted blue when an idea crosses between traditions. Select a school to light up its direct links or its whole lineage, and filter by branch (metaphysics, knowledge, ethics, politics, logic and language, mind, God and the ultimate). Hover a line to read what passed along it.
 - **Thinkers.** Each thinker is a square placed at about the age of forty. Ties join teachers to students, readers to the writers who shaped them, and critics to their targets; each kind can be switched off.
 - **Crossings.** A matrix, after Bertin: rows give, columns receive, and each square counts the school links and thinker ties that crossed from one tradition into another. Select a square to read every crossing behind it.
 - **Questions.** Seven big questions (what is real, how we know, how to live, what makes power legitimate, what the self is, whether words reach the truth, whether there is a ground of everything), each answered by a dozen schools in time order, with a small map of where each answer sits.
 - **Schools.** An index of every school by tradition, each with a sparkline of its lifetime on the shared time axis.
-- **Panels.** A school's page gives its question, why it arose, the reasoning behind it, three key claims, what it left, its thinkers and key texts, where it came from and what it led to, and its answers to the big questions. A thinker's page gives their idea, works and schools, their circle (teachers, influences, students, those they shaped and their critics, drawn as one small Mondrian composition), and contemporaries in other traditions. Portraits are Wikipedia lead images (Commons files only).
+- **Panels.** A school's page gives its question, why it arose, the reasoning behind it, three key claims, what it left, its thinkers and key texts, where it came from and what it led to, and its answers to the big questions. A thinker's page gives their idea, works and schools, their circle (teachers, influences, students, those they shaped and their critics, drawn as one small Mondrian composition), and contemporaries in other traditions. A thinker's panel also has a fuller two-paragraph introduction (life and setting, then the thought explained), and both kinds of panel show the fact checks that concern them.
 - **Search** (<kbd>/</kbd>) covers schools, thinkers and works in both languages. <kbd>Esc</kbd> closes panels.
 - **Shareable links.** English is the default; `?lang=zh` opens the Chinese view. The hash records the open school or thinker, the question and the crossing, e.g. `/?lang=zh#s=madhyamaka` or `/#t=kant&q=know&x=greek.islamic`.
-- **No build step.** Plain HTML, CSS and JavaScript, with the content in four data files. A sibling of [Art-isms](https://artisms.geekplux.org/) and [Worldlines](https://worldlines.geekplux.org/).
+- **A page for everything.** Every school and thinker also has a static page in each language (`/schools/stoicism/`, `/zh/thinkers/kant/`), with its own title, description, canonical and hreflang links, Open Graph card and JSON-LD, plus hub pages for all schools and all thinkers. They are written by `scripts/build-pages.mjs` from the data, so search engines and readers without JavaScript see the whole atlas.
+- **Fact-check.** The first draft's doubts were checked against published scholarship; every verdict, finding and source is published at [/fact-check/](https://dialectica.geekplux.org/fact-check/) and beside the entry it concerns.
+- **No build step.** Plain HTML, CSS and JavaScript, with the content in five data files; the static pages are generated by a dev-time script and committed. A sibling of [Art-isms](https://artisms.geekplux.org/) and [Worldlines](https://worldlines.geekplux.org/).
 
 ## Run it locally
 
@@ -32,19 +34,27 @@ python3 -m http.server 8000 --directory public
 
 ```
 public/                 everything that is deployed, and nothing else
-  index.html            page skeleton, static copy, SEO tags, analytics setup
+  index.html            the atlas: page skeleton, static copy, SEO tags, analytics setup
   assets/styles.css     all styles (paper, ink and De Stijl)
   assets/app.js         the hero, both maps, crossings, questions, panels, search, i18n, routing, consent bar
+  assets/page.js        consent bar and page view for the static pages
   data/core.js          traditions, branches, eras of the time axis, the big questions, learning notes
   data/schools.js       every school
-  data/thinkers.js      every thinker
+  data/thinkers.js      every thinker (with `portrait` written by fetch-portraits)
   data/links.js         links between schools and ties between thinkers
-  _headers              cache and security headers for Cloudflare
-  robots.txt, sitemap.xml, favicon.svg, og.png (social card)
-scripts/check-data.mjs  validates the data, the asset stamps and the counts quoted in the page
-scripts/stamp-assets.mjs  writes ?v=<content hash> into index.html
-docs/                   open questions and fact-check passes
-wrangler.jsonc          Cloudflare Workers Static Assets config
+  data/facts.js         the fact checks: verdict, finding and sources
+  images/portraits/     hosted portraits (WebP, 600 and 300px)
+  schools/, thinkers/, fact-check/, credits/, zh/    generated static pages (do not edit)
+  sitemap.xml           generated
+  _headers, robots.txt, favicon.svg, og.png
+scripts/check-data.mjs      validates the data, portraits, credits, asset stamps, counts and generated pages
+scripts/build-pages.mjs     writes the static pages, the sitemap and the static index in index.html
+scripts/fetch-portraits.mjs downloads portraits from Commons and regenerates CREDITS.md
+scripts/stamp-assets.mjs    writes ?v=<content hash> into index.html
+scripts/lib/                shared helpers (data loading and saving, credits)
+docs/                       fact-check record and open questions
+CREDITS.md                  image credits (generated)
+wrangler.jsonc              Cloudflare Workers Static Assets config
 ```
 
 ## Content model
@@ -96,18 +106,20 @@ Links carry a one-sentence `note` on what passed between them; ties may.
 
 ## Adding or correcting content
 
-1. Edit the data file.
-2. If you changed `assets/app.js` or `assets/styles.css`, run `node scripts/stamp-assets.mjs`.
-3. Run `node scripts/check-data.mjs`; add `--warnings` to list thinkers without ties and schools without links.
-4. Open the page in both languages, at desktop width and at 390px.
+1. Edit the data file. Scripts should go through `loadData()`/`saveData()` in `scripts/lib/data.mjs`, which keep the one-entry-per-line layout.
+2. To add a portrait, set the thinker's `c` to a Wikimedia Commons file name (the artwork must be free; see CLAUDE.md), then run `node scripts/fetch-portraits.mjs`. Look at the image before committing.
+3. If you changed `assets/app.js` or `assets/styles.css`, run `node scripts/stamp-assets.mjs`.
+4. Run `node scripts/build-pages.mjs` to regenerate the static pages and sitemap.
+5. Run `node scripts/check-data.mjs`; add `--warnings` to list thinkers without ties and schools without links.
+6. Open the page in both languages, at desktop width and at 390px.
 
-CI runs the same check on every push and pull request. Facts the first content pass could not verify are listed in `docs/open-questions-2026-10.md`.
+CI runs the same check on every push and pull request; it fails if a stamp, a portrait hash, CREDITS.md or a generated page is stale.
 
 ## Deployment
 
 Intended for **https://dialectica.geekplux.org/** on **Cloudflare Workers Static Assets** with Workers Builds, like the sibling sites: every push to `master` runs `npx wrangler deploy`, which uploads `public/` as configured in `wrangler.jsonc`. The Worker name `dialectica` must match the Worker in the Cloudflare dashboard.
 
-`public/_headers` caches `assets/` for a year. That is safe because every reference carries a content hash (`?v=…`) written by `scripts/stamp-assets.mjs`; `check-data` fails while a stamp is stale. `index.html` and `data/` are revalidated on every visit.
+`public/_headers` caches `assets/` and `images/` for a year. That is safe because every reference carries a content hash (`?v=…`) written by `scripts/stamp-assets.mjs`, `scripts/build-pages.mjs` and `scripts/fetch-portraits.mjs`; `check-data` fails while a hash is stale. HTML and `data/` are revalidated on every visit.
 
 ## Analytics
 
@@ -121,4 +133,4 @@ Schools rarely begin or end in a single year, and many ancient dates are traditi
 
 - Code (`public/index.html`, `public/assets/`, `scripts/`): [MIT](LICENSE)
 - Written content in `public/data/`: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- Portraits are not part of this repository. Each one is loaded from Wikimedia Commons under its own licence.
+- Portraits in `public/images/portraits/` are resized from Wikimedia Commons files and keep their own licences (public domain or Creative Commons); see [CREDITS.md](CREDITS.md). Other images are loaded from Wikipedia at view time.

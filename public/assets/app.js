@@ -9,7 +9,7 @@
   const TR = D.traditions, BR = D.branches, ERA = D.eras, QS = D.questions;
   const SC = D.schools.slice().sort((a, b) => a.start - b.start || a.end - b.end);
   const TK = D.thinkers.slice().sort((a, b) => a.born - b.born);
-  const LK = D.links, TI = D.ties;
+  const LK = D.links, TI = D.ties, FACTS = D.facts || [];
   const TRB = byId(TR), BRB = byId(BR), SCB = byId(SC), TKB = byId(TK), QSB = byId(QS);
   const MIN_YEAR = ERA[0].start;
   const ANSWERS = QS.reduce((n, q) => n + q.answers.length, 0);
@@ -61,7 +61,7 @@
       learnTitle: "How to read philosophy without getting lost.",
       learnNote: "This atlas is a map, not the territory: a deliberately selective set of schools, thinkers and lines of influence. Every line is a simplification of conversations that ran for generations.",
       fDatesT: "About the dates",
-      fDates: "Schools rarely begin or end in a single year, and many ancient dates, especially in India and early China, are traditional or disputed. The blocks show conventional spans; the panels say when a date is uncertain.",
+      fDates: "Schools rarely begin or end in a single year, and many ancient dates, especially in India and early China, are traditional or disputed. The blocks show conventional spans; the panels say when a date is uncertain. Every check we made, with its sources, is on the <a href=\"/fact-check/\">fact-check</a> page. Each school and thinker also has its own page: see <a href=\"/schools/\">all schools</a> and <a href=\"/thinkers/\">all thinkers</a>.",
       fImgT: "About the images",
       fImg: "Portraits are the lead images of English Wikipedia articles, shown only when the file is on Wikimedia Commons. Every panel links to its source; check the file page before reusing an image.",
       fProjT: "The project",
@@ -74,7 +74,8 @@
       outLabel: { dev: "Carried on by", react: "Opposed by", fuse: "Borrowed by" },
       rel: { teachers: "Teachers", students: "Students", shapedBy: "Shaped by", shaped: "Shaped", against: "Argued against", criticsOf: "Criticised by" },
       meanwhile: "Meanwhile, in other traditions", schoolsOf: "Schools", circle: "Their circle", tieNotes: "About these ties",
-      showTree: "Show in the family tree ↑", showNet: "Show in the network ↑",
+      showTree: "Show in the family tree ↑", showNet: "Show in the network ↑", permalink: "Page of its own ↗", record: "On the record", sources: "Sources", allChecks: "Every fact check",
+      verdict: { confirmed: "Confirmed", corrected: "Corrected", contested: "Contested", uncertain: "Uncertain" },
       readWiki: "Read on Wikipedia ↗", source: "Image", plate: "No free image here",
       living: "living", alone: "No school: an independent voice",
       searchHelp: "Try “virtue”, “emptiness”, “Kant”, “the self” or a book title. Press Esc to close.", searchPh: "Search philosophy…",
@@ -128,7 +129,7 @@
       learnTitle: "如何读哲学而不迷路。",
       learnNote: "这部图谱是地图，不是疆域本身：它有意挑选了一部分学派、思想家与影响线索。每一条连线，都是对延续了几代人的对话的简化。",
       fDatesT: "关于年代",
-      fDates: "学派很少在某一年突然开始或结束；许多古代年代，尤其是印度与先秦的年代，都只是传统说法或尚有争议。色块显示的是约定俗成的时间跨度，年代不确定之处会在详情中注明。",
+      fDates: "学派很少在某一年突然开始或结束；许多古代年代，尤其是印度与先秦的年代，都只是传统说法或尚有争议。色块显示的是约定俗成的时间跨度，年代不确定之处会在详情中注明。我们做过的每一项核对及其来源，都列在<a href=\"/zh/fact-check/\">史实核对</a>页。每个学派和思想家也都有单独的页面：见<a href=\"/zh/schools/\">全部学派</a>与<a href=\"/zh/thinkers/\">全部思想家</a>。",
       fImgT: "关于图片",
       fImg: "人物图像取自英文维基百科条目的首图，且仅在文件位于维基共享资源时显示。每张图都链接到来源页；转载前请先查看文件页的许可信息。",
       fProjT: "关于项目",
@@ -141,7 +142,8 @@
       outLabel: { dev: "后继", react: "遭到反对", fuse: "被借鉴" },
       rel: { teachers: "老师", students: "学生", shapedBy: "受其影响", shaped: "影响了", against: "批评过", criticsOf: "批评者" },
       meanwhile: "同一时期，其他传统中", schoolsOf: "所属学派", circle: "关系圈", tieNotes: "关于这些关系",
-      showTree: "在谱系中查看 ↑", showNet: "在关系网中查看 ↑",
+      showTree: "在谱系中查看 ↑", showNet: "在关系网中查看 ↑", permalink: "单独页面 ↗", record: "史实核对", sources: "来源", allChecks: "全部核对记录",
+      verdict: { confirmed: "已核实", corrected: "已更正", contested: "有争议", uncertain: "尚无定论" },
       readWiki: "在维基百科阅读 ↗", source: "图片", plate: "暂无自由版权图片",
       living: "在世", alone: "不属于任何学派：一个独立的声音",
       searchHelp: "试试“美德”“空”“康德”“自我”或一本书名。按 Esc 关闭。", searchPh: "搜索哲学……",
@@ -595,7 +597,7 @@
       return `<section class="s-col" style="${trVars(tr.id)}"><header><span class="micro">${esc(t("nSchools")(list.length))}</span><h3>${esc(p(tr.name))}</h3><p>${esc(p(tr.description))}</p></header>` +
         `<div class="s-list">${list.map((s) => {
           const a = fx(Math.max(s.start, MIN_YEAR)), b = fx(s.end);
-          return `<button type="button" class="s-item" data-s="${s.id}"><span>${esc(p(s.dates))}</span><span class="life" aria-hidden="true"><i style="left:${(a * 100).toFixed(2)}%;width:${Math.max(0.6, (b - a) * 100).toFixed(2)}%"></i></span><b>${esc(p(s.name))}</b><small>${esc(p(s.idea))}</small></button>`;
+          return `<a class="s-item" href="${pageHref("s", s.id)}" data-s="${s.id}"><span>${esc(p(s.dates))}</span><span class="life" aria-hidden="true"><i style="left:${(a * 100).toFixed(2)}%;width:${Math.max(0.6, (b - a) * 100).toFixed(2)}%"></i></span><b>${esc(p(s.name))}</b><small>${esc(p(s.idea))}</small></a>`;
         }).join("")}</div></section>`;
     }).join("");
   }
@@ -610,15 +612,18 @@
   const HERO_CELLS = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
   const POOL = TR.map((tr) => TK.filter((k) => k.tradition === tr.id && k.portrait));
   const portraitSrc = (k, small) => `images/portraits/${k.id}${small ? "-300" : ""}.webp?v=${k.portrait.v}`;
-  /* Narrow cells show a short form: the shorter of a name and its bracketed alternative ("The Buddha", "Avicenna"),
-     else the family name ("Marx"); in Chinese, the name without its bracket or given names ("释迦牟尼", "尼采") */
+  /* Labels use the short form a museum would: the shorter of a name and its bracketed alternative ("The Buddha",
+     "Avicenna"), the name before "of" ("Augustine"), else the family name ("Marx"); in Chinese, the name without its
+     bracket or given names ("释迦牟尼", "尼采") */
   const shortName = (k) => {
     const n = p(k.name);
     if (lang === "zh") return n.replace(/（.*?）/g, "").split("·").pop();
     const paren = n.match(/^(.*?)\s*\(([^)]+)\)$/);
     if (paren) return [paren[1], paren[2]].sort((a, b) => a.length - b.length)[0];
+    if (/ of /.test(n)) return n.split(" of ")[0];
     return n.split(" ").pop();
   };
+  /* The tall, thin cells label their face like a book spine */
   const NARROW = new Set(["p3", "p7"]);
   let heroSet = null;
   function dealHero() {
@@ -628,11 +633,11 @@
   }
   function renderHero() {
     if (!heroSet) dealHero();
-    $("#hero-art").innerHTML = heroSet.map((k, i) => `<button type="button" class="hp" data-t="${k.id}" style="grid-area:${HERO_CELLS[i]};${trVars(k.tradition)}">` +
+    $("#hero-art").innerHTML = heroSet.map((k, i) => `<button type="button" class="hp${NARROW.has(HERO_CELLS[i]) ? " narrow" : ""}" data-t="${k.id}" style="grid-area:${HERO_CELLS[i]};${trVars(k.tradition)}">` +
       `<img src="${portraitSrc(k, true)}" srcset="${portraitSrc(k, true)} 300w, ${portraitSrc(k)} 600w" sizes="(max-width: 900px) 50vw, 22vw" width="${k.portrait.w}" height="${k.portrait.h}" alt="${esc(p(k.name))}"${k.focus ? ` style="object-position:${k.focus}"` : ""}${i < 3 ? ' fetchpriority="high"' : ' loading="lazy"'}>` +
-      `<span class="hp-tag"><i></i><b>${esc(NARROW.has(HERO_CELLS[i]) || innerWidth < 600 ? shortName(k) : p(k.name))}</b></span></button>`).join("") +
+      `<span class="hp-tag"><i></i><b>${esc(shortName(k))}</b></span></button>`).join("") +
       `<span class="hb" style="grid-area:r1;background:var(--red)"></span><span class="hb" style="grid-area:y1;background:var(--yellow)"></span><span class="hb" style="grid-area:b1;background:var(--blue)"></span>` +
-      `<div class="hp-cap"><p id="hero-cap"></p><div class="hp-tools"><button type="button" class="hp-shuffle" id="hero-shuffle">↻ ${esc(t("heroShuffle"))}</button><a href="credits/" class="hp-credit">${esc(t("heroCredits"))}</a></div></div>`;
+      `<div class="hp-cap"><p id="hero-cap"></p><div class="hp-tools"><button type="button" class="hp-shuffle" id="hero-shuffle">↻ ${esc(t("heroShuffle"))}</button><a href="${lang === "zh" ? "/zh" : ""}/credits/" class="hp-credit">${esc(t("heroCredits"))}</a></div></div>`;
     heroCaption(null);
   }
   function heroCaption(k) {
@@ -651,6 +656,17 @@
     dealHero(); renderHero();
     track("select_content", { content_type: "hero", item_id: "shuffle" });
   });
+
+  /* Every school and thinker also has a static page (scripts/build-pages.mjs), for search engines and sharing */
+  const pageHref = (kind, id) => `${lang === "zh" ? "/zh" : ""}/${kind === "s" ? "schools" : "thinkers"}/${id}/`;
+
+  /* Fact checks about a school or thinker, and about the lines that reach it (data/facts.js, /fact-check/) */
+  function factsHtml(keys) {
+    const list = keys.flatMap((key) => FACTS.filter((f) => f.about === key));
+    if (!list.length) return "";
+    return `<div class="d-sec"><h3>${esc(t("record"))}</h3>${list.map((f) => `<div class="fc fc-${f.verdict}"><span class="fc-v">${esc(t("verdict")[f.verdict])}</span><p class="fc-claim">${esc(p(f.claim))}</p><p>${esc(p(f.finding))}</p>${f.sources && f.sources.length ? `<p class="fc-src">${esc(t("sources"))}: ${f.sources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join(" · ")}</p>` : ""}</div>`).join("")}<p class="more"><a href="${lang === "zh" ? "/zh" : ""}/fact-check/">${esc(t("allChecks"))} →</a></p></div>`;
+  }
+  const paras = (text) => esc(text).split(/\n\n+/).map((x) => `<p>${x}</p>`).join("");
 
   /* ── Detail panel ──────────────────────────── */
   const detail = $("#detail");
@@ -710,12 +726,13 @@
       <div class="fact"><span class="micro">${esc(t("claims"))}</span><ol class="claims">${s.claims.map((c) => `<li><span>${esc(p(c))}</span></li>`).join("")}</ol></div>
       <div class="fact"><span class="micro">${esc(t("legacy"))}</span><p>${esc(p(s.legacy))}</p></div>
       <div class="stamps">${s.branches.map((b) => `<button type="button" class="stamp" data-branch="${b}">${esc(p(BRB[b].name))}</button>`).join("")}</div>
-      <div class="d-links"><a href="${esc(readUrl(s))}" target="_blank" rel="noopener">${esc(t("readWiki"))}</a><button type="button" data-goto="lineage">${esc(t("showTree"))}</button></div>
+      <div class="d-links"><a href="${esc(readUrl(s))}" target="_blank" rel="noopener">${esc(t("readWiki"))}</a><button type="button" data-goto="lineage">${esc(t("showTree"))}</button><a href="${pageHref("s", s.id)}">${esc(t("permalink"))}</a></div>
       ${figs.length ? `<div class="d-sec"><h3>${esc(t("people"))}</h3>${figs.map((k) => thinkerRow(k)).join("")}</div>` : ""}
       ${s.works && s.works.length ? `<div class="d-sec"><h3>${esc(t("works"))}</h3>${s.works.map((w) => workRow(w, TKB[w.by])).join("")}</div>` : ""}
       ${ins.length ? `<div class="d-sec"><h3>${esc(t("from"))}</h3>${ins.map((l) => schoolRow(SCB[l.from], t("inLabel")[l.kind], l.note, l.kind)).join("")}</div>` : ""}
       ${outs.length ? `<div class="d-sec"><h3>${esc(t("to"))}</h3>${outs.map((l) => schoolRow(SCB[l.to], t("outLabel")[l.kind], l.note, l.kind)).join("")}</div>` : ""}
-      ${answers.length ? `<div class="d-sec"><h3>${esc(t("answersH"))}</h3>${answers.map(({ q, a }) => `<button type="button" class="par" data-q="${q.id}" data-scroll="1"><span>${esc(p(BRB[q.branch].name))}</span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(q.q))}</strong><em>${esc(p(a.a))}</em></span></button>`).join("")}</div>` : ""}`;
+      ${answers.length ? `<div class="d-sec"><h3>${esc(t("answersH"))}</h3>${answers.map(({ q, a }) => `<button type="button" class="par" data-q="${q.id}" data-scroll="1"><span>${esc(p(BRB[q.branch].name))}</span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(q.q))}</strong><em>${esc(p(a.a))}</em></span></button>`).join("")}</div>` : ""}
+      ${factsHtml([`school:${id}`, ...ins.map((l) => `link:${l.from}>${l.to}`)])}`;
     loadFigure(s);
     showPanel();
   }
@@ -751,12 +768,14 @@
       <p class="d-role">${esc(p(k.role))}</p>
       ${figure(k, k.tradition, true)}
       <p class="d-sum">${esc(p(k.idea))}</p>
+      ${k.detail ? `<div class="d-prose">${paras(p(k.detail))}</div>` : ""}
       <div class="stamps">${schools.length ? schools.map((s) => `<button type="button" class="stamp" data-s="${s.id}" style="${trVars(s.tradition)}">${esc(p(s.name))}</button>`).join("") : `<span class="stamp">${esc(t("alone"))}</span>`}</div>
-      <div class="d-links"><a href="${esc(readUrl(k))}" target="_blank" rel="noopener">${esc(t("readWiki"))}</a><button type="button" data-goto="thinkers">${esc(t("showNet"))}</button></div>
+      <div class="d-links"><a href="${esc(readUrl(k))}" target="_blank" rel="noopener">${esc(t("readWiki"))}</a><button type="button" data-goto="thinkers">${esc(t("showNet"))}</button><a href="${pageHref("t", k.id)}">${esc(t("permalink"))}</a></div>
       ${k.works && k.works.length ? `<div class="d-sec"><h3>${esc(t("worksOf"))}</h3>${k.works.map((w) => workRow(w)).join("")}</div>` : ""}
       ${groups.some(([, list]) => list.length) ? `<div class="d-sec"><h3>${esc(t("circle"))}</h3>${circle(k, groups)}</div>` : ""}
       ${notes.length ? `<div class="d-sec"><h3>${esc(t("tieNotes"))}</h3>${notes.map((x) => `<button type="button" class="par" data-t="${x.k.id}"><span><i style="${trVars(x.k.tradition)}"></i>${esc(t("rel")[x.g])}</span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(x.k.name))}</strong><em>${esc(p(x.note))}</em></span></button>`).join("")}</div>` : ""}
-      ${meanwhile.length ? `<div class="d-sec"><h3>${esc(t("meanwhile"))}</h3>${meanwhile.map((x) => thinkerRow(x)).join("")}</div>` : ""}`;
+      ${meanwhile.length ? `<div class="d-sec"><h3>${esc(t("meanwhile"))}</h3>${meanwhile.map((x) => thinkerRow(x)).join("")}</div>` : ""}
+      ${factsHtml([`thinker:${id}`, ...TI.filter((r) => r.from === id || r.to === id).map((r) => `tie:${r.from}>${r.to}`)])}`;
     loadFigure(k);
     showPanel();
   }
@@ -927,8 +946,10 @@
       if (el.dataset.scroll) { closeDetail(); $("#questions").scrollIntoView({ behavior: smooth() }); }
       return;
     }
-    if ((el = g("[data-s]"))) { openSchool(el.dataset.s); return; }
-    if ((el = g("[data-t]"))) { openThinker(el.dataset.t); return; }
+    /* Links to static pages open the panel in place; a modified or middle click still follows the link */
+    if ((el = g("[data-s], [data-t]")) && el.tagName === "A" && (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0)) return;
+    if ((el = g("[data-s]"))) { if (el.tagName === "A") ev.preventDefault(); openSchool(el.dataset.s); return; }
+    if ((el = g("[data-t]"))) { if (el.tagName === "A") ev.preventDefault(); openThinker(el.dataset.t); return; }
     if ((el = g("[data-branch]"))) {
       branch = el.dataset.branch === branch && el.classList.contains("stamp") ? "all" : el.dataset.branch;
       renderLineageBar(); paintLineage();

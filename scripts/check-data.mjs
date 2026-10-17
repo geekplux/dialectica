@@ -5,12 +5,13 @@
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { execFileSync } from "node:child_process";
 import { staleStamps } from "./stamp-assets.mjs";
 import { SITE, ROOT, portraitPath, contentHash } from "./lib/data.mjs";
 import { creditsMarkdown } from "./lib/credits.mjs";
 
 const sandbox = { window: {} };
-for (const f of ["core", "schools", "thinkers", "links"]) {
+for (const f of ["core", "schools", "thinkers", "links", "facts"]) {
   const file = fileURLToPath(new URL(`../public/data/${f}.js`, import.meta.url));
   vm.runInNewContext(readFileSync(file, "utf8"), sandbox, { filename: file });
 }
@@ -84,7 +85,7 @@ for (const t of D.thinkers) {
   if (!year(t.born)) fail(at, "born must be an integer year");
   if (t.died !== null && !(year(t.died) && t.died > t.born)) fail(at, "died must be null (living) or an integer after born");
   if (t.died === null && NOW - t.born > 105) fail(at, "listed as living but born over 105 years ago");
-  for (const f of ["life", "name", "role", "idea"]) bi(at, t[f], f);
+  for (const f of ["life", "name", "role", "idea", "detail"]) bi(at, t[f], f);
   for (const s of t.schools) {
     if (!schools.has(s)) fail(at, `unknown school "${s}"`);
     else if (!SCB[s].figures.includes(t.id)) warn(at, `school "${s}" does not list this thinker`);
@@ -134,6 +135,24 @@ D.ties.forEach((r, i) => {
 for (const t of D.thinkers) if (!D.ties.some((r) => r.from === t.id || r.to === t.id)) warn(`thinker "${t.id}"`, "has no ties");
 for (const s of D.schools) if (!D.links.some((l) => l.from === s.id || l.to === s.id)) warn(`school "${s.id}"`, "has no links");
 
+/* Fact checks: each is about something that exists, has a verdict, both languages and at least one source */
+if (!Array.isArray(D.facts)) fail("facts", "window.DIALECTICA.facts is missing");
+for (const [i, f] of (D.facts || []).entries()) {
+  const at = `fact ${i} (${f.about})`;
+  const m = /^(thinker|school|link|tie):([a-z0-9-]+)(?:>([a-z0-9-]+))?$/.exec(f.about || "");
+  if (!m) fail(at, "about must be thinker:id, school:id, link:a>b or tie:a>b");
+  else {
+    const [, kind, a, b] = m;
+    const ok = kind === "thinker" ? thinkers.has(a) : kind === "school" ? schools.has(a)
+      : kind === "link" ? D.links.some((l) => l.from === a && l.to === b) : D.ties.some((r) => r.from === a && r.to === b);
+    if (!ok) warn(at, "points at nothing in the data (the line may have been removed by the check itself)");
+  }
+  if (!["confirmed", "corrected", "contested", "uncertain"].includes(f.verdict)) fail(at, `unknown verdict "${f.verdict}"`);
+  bi(at, f.claim, "claim"); bi(at, f.finding, "finding");
+  if (!Array.isArray(f.sources) || !f.sources.length) fail(at, "needs at least one source");
+  for (const src of f.sources || []) if (!src.title || !/^https?:\/\//.test(src.url || "")) fail(at, "each source needs a title and an http(s) url");
+}
+
 /* Questions */
 const qids = ids(D.questions, "questions");
 for (const q of D.questions) {
@@ -157,6 +176,10 @@ for (const [n, en] of [[schools.size, "schools"], [thinkers.size, "thinkers"], [
 }
 
 for (const s of staleStamps()) fail("public/index.html", `${s} has a stale ?v= stamp: run node scripts/stamp-assets.mjs`);
+
+/* The static pages, sitemap and the index inside index.html are generated from the data: they must be current */
+try { execFileSync(process.execPath, [fileURLToPath(new URL("./build-pages.mjs", import.meta.url)), "--check"], { stdio: "pipe" }); }
+catch (e) { fail("static pages", String(e.stderr || e.message).trim().replace(/^✗ /, "")); }
 
 if (process.argv.includes("--warnings")) for (const w of warnings) console.warn("· " + w);
 if (errors.length) {
