@@ -73,7 +73,7 @@
       inLabel: { dev: "Grew out of", react: "Reacted against", fuse: "Borrowed from" },
       outLabel: { dev: "Carried on by", react: "Opposed by", fuse: "Borrowed by" },
       rel: { teachers: "Teachers", students: "Students", shapedBy: "Shaped by", shaped: "Shaped", against: "Argued against", criticsOf: "Criticised by" },
-      meanwhile: "Meanwhile, in other traditions", schoolsOf: "Schools",
+      meanwhile: "Meanwhile, in other traditions", schoolsOf: "Schools", circle: "Their circle", tieNotes: "About these ties",
       showTree: "Show in the family tree ↑", showNet: "Show in the network ↑",
       readWiki: "Read on Wikipedia ↗", source: "Image", plate: "No free image here",
       living: "living", alone: "No school: an independent voice",
@@ -140,7 +140,7 @@
       inLabel: { dev: "继承自", react: "反对", fuse: "借鉴自" },
       outLabel: { dev: "后继", react: "遭到反对", fuse: "被借鉴" },
       rel: { teachers: "老师", students: "学生", shapedBy: "受其影响", shaped: "影响了", against: "批评过", criticsOf: "批评者" },
-      meanwhile: "同一时期，其他传统中", schoolsOf: "所属学派",
+      meanwhile: "同一时期，其他传统中", schoolsOf: "所属学派", circle: "关系圈", tieNotes: "关于这些关系",
       showTree: "在谱系中查看 ↑", showNet: "在关系网中查看 ↑",
       readWiki: "在维基百科阅读 ↗", source: "图片", plate: "暂无自由版权图片",
       living: "在世", alone: "不属于任何学派：一个独立的声音",
@@ -774,6 +774,14 @@
     loadFigure(s);
     showPanel();
   }
+  /* A person's circle as a small Mondrian composition: those who formed them above, the thinker in their colour
+     across the middle, those they formed below, critiques in the bottom row. Empty cells stay paper */
+  function circle(k, groups) {
+    const cell = ([g, list]) => `<div class="cc cc-${g}${list.length ? "" : " empty"}"><span class="micro">${esc(t("rel")[g])}</span>${list.length
+      ? list.map((x) => `<button type="button" data-t="${x.k.id}" style="${trVars(x.k.tradition)}"><i></i>${esc(p(x.k.name))}</button>`).join("")
+      : "<b>—</b>"}</div>`;
+    return `<div class="circle">${cell(groups[0])}${cell(groups[1])}<div class="cc-me" style="${trVars(k.tradition)}"><b>${esc(p(k.name))}</b><span>${esc(p(k.life))}</span></div>${groups.slice(2).map(cell).join("")}</div>`;
+  }
   function openThinker(id) {
     const k = TKB[id];
     if (!k) return;
@@ -782,10 +790,11 @@
     paintLineage(); paintNet();
     const rel = (kind, dir) => TI.filter((r) => r.kind === kind && (dir > 0 ? r.from === id : r.to === id)).map((r) => ({ k: TKB[dir > 0 ? r.to : r.from], note: r.note })).filter((x) => x.k);
     const groups = [
-      ["teachers", rel("taught", -1)], ["students", rel("taught", 1)],
-      ["shapedBy", rel("infl", -1)], ["shaped", rel("infl", 1)],
+      ["teachers", rel("taught", -1)], ["shapedBy", rel("infl", -1)],
+      ["students", rel("taught", 1)], ["shaped", rel("infl", 1)],
       ["against", rel("opp", -1)], ["criticsOf", rel("opp", 1)]
-    ].filter(([, list]) => list.length);
+    ];
+    const notes = groups.flatMap(([g, list]) => list.filter((x) => x.note).map((x) => ({ ...x, g })));
     const fl = floruit(k), end = k.died ?? NOW;
     const meanwhile = TK.filter((x) => x.tradition !== k.tradition && x.born < end && (x.died ?? NOW) > k.born)
       .sort((a, b) => Math.abs(floruit(a) - fl) - Math.abs(floruit(b) - fl)).slice(0, 6).sort((a, b) => a.born - b.born);
@@ -800,7 +809,8 @@
       <div class="stamps">${schools.length ? schools.map((s) => `<button type="button" class="stamp" data-s="${s.id}" style="${trVars(s.tradition)}">${esc(p(s.name))}</button>`).join("") : `<span class="stamp">${esc(t("alone"))}</span>`}</div>
       <div class="d-links"><a href="${esc(readUrl(k))}" target="_blank" rel="noopener">${esc(t("readWiki"))}</a><button type="button" data-goto="thinkers">${esc(t("showNet"))}</button></div>
       ${k.works && k.works.length ? `<div class="d-sec"><h3>${esc(t("worksOf"))}</h3>${k.works.map((w) => workRow(w)).join("")}</div>` : ""}
-      ${groups.map(([g, list]) => `<div class="d-sec"><h3>${esc(t("rel")[g])}</h3>${list.map((x) => thinkerRow(x.k, x.note)).join("")}</div>`).join("")}
+      ${groups.some(([, list]) => list.length) ? `<div class="d-sec"><h3>${esc(t("circle"))}</h3>${circle(k, groups)}</div>` : ""}
+      ${notes.length ? `<div class="d-sec"><h3>${esc(t("tieNotes"))}</h3>${notes.map((x) => `<button type="button" class="par" data-t="${x.k.id}"><span><i style="${trVars(x.k.tradition)}"></i>${esc(t("rel")[x.g])}</span><span style="font:inherit;color:inherit;text-transform:none"><strong>${esc(p(x.k.name))}</strong><em>${esc(p(x.note))}</em></span></button>`).join("")}</div>` : ""}
       ${meanwhile.length ? `<div class="d-sec"><h3>${esc(t("meanwhile"))}</h3>${meanwhile.map((x) => thinkerRow(x)).join("")}</div>` : ""}`;
     loadFigure(k);
     showPanel();

@@ -392,6 +392,23 @@ button.par:hover strong { color: var(--red); }
 .par em { display: block; font-style: normal; font-size: 13.5px; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
 .par small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
 
+/* A thinker's circle: a Mondrian composition with ink for its lines */
+.circle { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; background: var(--ink); border: 4px solid var(--ink); margin-top: 12px; }
+.cc { background: var(--white); padding: 10px 12px 12px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 4px 6px; min-height: 64px; }
+.cc .micro { flex: 1 0 100%; margin-bottom: 4px; }
+.cc.empty { background: var(--paper-deep); }
+.cc.empty b { color: var(--muted); font-weight: 400; }
+.cc button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 2px 0; font-size: 13.5px; font-weight: 700; text-align: left; }
+.cc button i { width: 9px; height: 9px; flex: none; background: var(--c); border: 1px solid var(--ink); }
+.cc button:hover { color: var(--red); }
+.cc-against, .cc-criticsOf { background: #fbf3f1; }
+.cc-against .micro, .cc-criticsOf .micro { color: var(--red); }
+.cc-against.empty, .cc-criticsOf.empty { background: var(--paper-deep); }
+.cc-me { grid-column: 1 / -1; background: var(--c); color: var(--on); padding: 14px 14px 12px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cc-me b { font: 900 24px/1 var(--f-display); letter-spacing: -.02em; }
+:lang(zh) .cc-me b { font-family: var(--f-body); letter-spacing: 0; font-size: 20px; }
+.cc-me span { font: 700 11px/1 var(--f-mono); opacity: .85; }
+
 /* ── Search ── */
 .search { position: fixed; inset: 0; z-index: 90; background: rgba(20,20,20,.96); color: var(--white); display: none; padding: clamp(20px, 6vw, 90px); overflow-y: auto; }
 .search.open { display: block; }
