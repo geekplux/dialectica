@@ -1,7 +1,7 @@
 # Dialectica: working conventions
 
 A static, bilingual (EN/中文) atlas of philosophy: 8 traditions, 72 schools, 204 thinkers, the links between schools
-and the ties between thinkers. Repository: github.com/geekplux/dialectica. Sibling projects: Art-isms, Worldlines.
+and the ties between thinkers, drawn as a lineage map, a thinkers' network, a crossings matrix and a questions grid. Repository: github.com/geekplux/dialectica. Sibling projects: Art-isms, Worldlines.
 Read README.md for the data model and file layout. These are the rules that are easy to break.
 
 ## No build step
@@ -31,6 +31,11 @@ Read README.md for the data model and file layout. These are the rules that are 
 
 - Mondrian carries meaning: colour = tradition, a block = a school, a square = a thinker; solid ink, dashed red and
   dotted blue lines are the three kinds of link. Everything else stays paper and ink. Prefer removing emphasis to adding it.
+- Worldlines follows Mondrian's 1920s grids; Dialectica follows his New York paintings (lines that cross and weave).
+  The hero is generated from the data, so it changes when the data does: keep it that way rather than drawing art by hand.
+- Edges read in the direction the idea travelled (A → B); labels say what B did with it ("answered with a critique").
+- A name always sits on its block: when a school is too short-lived to hold its name, the block continues in a white
+  cell. Nothing may extend past the end of a map.
 - Hairlines inside sections; heavy rules only between sections.
 - Check every change at desktop width and at 390px, in both languages: no horizontal page scroll, no console errors.
 

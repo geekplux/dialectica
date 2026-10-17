@@ -1,16 +1,22 @@
 # Dialectica · 思辨谱
 
-A bilingual (English / 中文) atlas of philosophy in the style of Mondrian. It draws the family tree of 72 schools and the network of 204 thinkers across eight traditions, from the Upanishads and the Hundred Schools to analytic philosophy, and shows where each idea came from, the reasoning behind it, and who taught, read and argued with whom.
+A bilingual (English / 中文) atlas of philosophy in the style of Mondrian. It draws the family tree of 72 schools and the network of 204 thinkers across eight traditions, from the Upanishads and the Hundred Schools to analytic philosophy, and shows where each idea came from, the reasoning behind it, who taught, read and argued with whom, and where traditions met.
 
-**Live site:** https://dialectica.geekplux.org/ ([中文](https://dialectica.geekplux.org/?lang=zh)) — once deployed.
+![Dialectica: the title beside the city of ideas, a Mondrian-style map of traditions and the ideas that crossed between them](public/og.png)
 
+**Live site:** https://dialectica.geekplux.org/ ([中文](https://dialectica.geekplux.org/?lang=zh)), once deployed.
+
+Where its sibling [Worldlines](https://worldlines.geekplux.org/) borrows the grids of Mondrian's 1920s, Dialectica takes its cue from his last paintings, *New York City I* and *Broadway Boogie-Woogie*: coloured lines that cross and weave. Colour always means tradition.
+
+- **The city of ideas.** The hero is drawn from the data: each tradition is a street in its colour, every idea that crossed into another tradition is an upright landing on the street it reached, thinkers are small squares (tinted when they learned across a border), and the most connected schools are larger blocks. Hover to read what crossed; select to open it.
 - **Lineage.** Every school is a block on a shared time axis, one lane per tradition, drawn for as long as it lasted. Lines join schools: solid when an idea is carried forward, dashed red when one school argues against another, dotted blue when an idea crosses between traditions. Select a school to light up its direct links or its whole lineage, and filter by branch (metaphysics, knowledge, ethics, politics, logic and language, mind, God and the ultimate). Hover a line to read what passed along it.
 - **Thinkers.** Each thinker is a square placed at about the age of forty. Ties join teachers to students, readers to the writers who shaped them, and critics to their targets; each kind can be switched off.
+- **Crossings.** A matrix, after Bertin: rows give, columns receive, and each square counts the school links and thinker ties that crossed from one tradition into another. Select a square to read every crossing behind it.
 - **Questions.** Seven big questions (what is real, how we know, how to live, what makes power legitimate, what the self is, whether words reach the truth, whether there is a ground of everything), each answered by a dozen schools in time order, with a small map of where each answer sits.
-- **Schools.** An index of every school by tradition.
-- **Panels.** A school's page gives its question, why it arose, the reasoning behind it, three key claims, what it left, its thinkers and key texts, where it came from and what it led to, and its answers to the big questions. A thinker's page gives their idea, works, schools, teachers, students, influences, critics, and contemporaries in other traditions. Portraits are Wikipedia lead images (Commons files only).
+- **Schools.** An index of every school by tradition, each with a sparkline of its lifetime on the shared time axis.
+- **Panels.** A school's page gives its question, why it arose, the reasoning behind it, three key claims, what it left, its thinkers and key texts, where it came from and what it led to, and its answers to the big questions. A thinker's page gives their idea, works and schools, their circle (teachers, influences, students, those they shaped and their critics, drawn as one small Mondrian composition), and contemporaries in other traditions. Portraits are Wikipedia lead images (Commons files only).
 - **Search** (<kbd>/</kbd>) covers schools, thinkers and works in both languages. <kbd>Esc</kbd> closes panels.
-- **Shareable links.** English is the default; `?lang=zh` opens the Chinese view. The hash records the open school or thinker and the question, e.g. `/?lang=zh#s=madhyamaka` or `/#t=kant&q=know`.
+- **Shareable links.** English is the default; `?lang=zh` opens the Chinese view. The hash records the open school or thinker, the question and the crossing, e.g. `/?lang=zh#s=madhyamaka` or `/#t=kant&q=know&x=greek.islamic`.
 - **No build step.** Plain HTML, CSS and JavaScript, with the content in four data files. A sibling of [Art-isms](https://artisms.geekplux.org/) and [Worldlines](https://worldlines.geekplux.org/).
 
 ## Run it locally
@@ -28,13 +34,13 @@ python3 -m http.server 8000 --directory public
 public/                 everything that is deployed, and nothing else
   index.html            page skeleton, static copy, SEO tags, analytics setup
   assets/styles.css     all styles (paper, ink and De Stijl)
-  assets/app.js         layout of both maps, panels, questions, search, i18n, routing, consent bar
+  assets/app.js         the hero, both maps, crossings, questions, panels, search, i18n, routing, consent bar
   data/core.js          traditions, branches, eras of the time axis, the big questions, learning notes
   data/schools.js       every school
   data/thinkers.js      every thinker
   data/links.js         links between schools and ties between thinkers
   _headers              cache and security headers for Cloudflare
-  robots.txt, sitemap.xml, favicon.svg
+  robots.txt, sitemap.xml, favicon.svg, og.png (social card)
 scripts/check-data.mjs  validates the data, the asset stamps and the counts quoted in the page
 scripts/stamp-assets.mjs  writes ?v=<content hash> into index.html
 docs/                   open questions and fact-check passes
