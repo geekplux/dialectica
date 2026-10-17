@@ -4,7 +4,7 @@ A bilingual (English / 中文) atlas of philosophy in the style of Mondrian. It 
 
 ![Dialectica: the title beside a Mondrian grid of philosophers' portraits, one from each tradition](public/og.png)
 
-**Live site:** https://dialectica.geekplux.org/ ([中文](https://dialectica.geekplux.org/?lang=zh)), once deployed.
+**Live site:** https://dialectica.geekplux.org/ ([中文](https://dialectica.geekplux.org/?lang=zh))
 
 Colour always means tradition. Where its sibling [Worldlines](https://worldlines.geekplux.org/) is all grids, Dialectica puts people in the grid and follows the lines between them.
 
@@ -117,7 +117,7 @@ CI runs the same check on every push and pull request; it fails if a stamp, a po
 
 ## Deployment
 
-Intended for **https://dialectica.geekplux.org/** on **Cloudflare Workers Static Assets** with Workers Builds, like the sibling sites: every push to `master` runs `npx wrangler deploy`, which uploads `public/` as configured in `wrangler.jsonc`. The Worker name `dialectica` must match the Worker in the Cloudflare dashboard.
+The site is served at **https://dialectica.geekplux.org/** by **Cloudflare Workers Static Assets** with Workers Builds (Git integration), like the sibling sites: every push to `master` runs `npx wrangler deploy`, which uploads `public/` as configured in `wrangler.jsonc`. The Worker name `dialectica` must match the Worker in the Cloudflare dashboard.
 
 `public/_headers` caches `assets/` and `images/` for a year. That is safe because every reference carries a content hash (`?v=…`) written by `scripts/stamp-assets.mjs`, `scripts/build-pages.mjs` and `scripts/fetch-portraits.mjs`; `check-data` fails while a hash is stale. HTML and `data/` are revalidated on every visit.
 
