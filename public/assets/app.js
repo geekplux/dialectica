@@ -24,7 +24,10 @@
       h1a: "DIALEC", h1b: "TICA",
       dek: "Every idea is <strong>an answer to an older one</strong>. Follow the arguments: who inherited them, who turned against them, and why.",
       stats: () => `${TR.length} traditions · ${SC.length} schools · ${TK.length} thinkers · ${LK.length} lines of influence`,
-      cue: "Begin with the family tree", heroCap: "Thesis. Objection. Reply. The conversation is 3,000 years long.",
+      cue: "Begin with the family tree",
+      heroTitle: "The city of ideas",
+      heroCap: "Each coloured street is a tradition. Each upright is an idea that crossed into another. Squares are thinkers, tinted when they learned across a border.",
+      heroLearned: (x) => `Learned from ${x}`,
       m1t: "Read → across", m1: "Each lane is a tradition and time runs left to right. A block is a school, as long as it lasted.",
       m2t: "Follow ⤳ a line", m2: "Solid lines carry an idea forward. Dashed red lines argue against it. Dotted blue lines cross between traditions.",
       m3t: "Ask ? a question", m3: "Put one question to every tradition, and read their answers side by side.",
@@ -81,7 +84,10 @@
       h1a: "思辨", h1b: "谱",
       dek: "每一种思想，都是<strong>对更早思想的回答</strong>。沿着论证走下去：谁继承了它，谁反对了它，又是为什么。",
       stats: () => `${TR.length} 个传统 · ${SC.length} 个学派 · ${TK.length} 位思想家 · ${LK.length} 条影响线索`,
-      cue: "从家族谱系开始", heroCap: "立论，反驳，再回应。这场对话已经持续了三千年。",
+      cue: "从家族谱系开始",
+      heroTitle: "思想之城",
+      heroCap: "每条彩色街道是一个传统，每条竖线是一次跨入别的传统的思想。小方块是思想家；跨越边界求学的人，带着别处的颜色。",
+      heroLearned: (x) => `师法于${x}`,
       m1t: "横向 → 阅读", m1: "每条泳道是一个传统，时间从左向右。一个色块就是一个学派，长度即它延续的时间。",
       m2t: "沿着 ⤳ 线索", m2: "实线把思想传下去，红色虚线是反对，蓝色点线是跨传统的吸收。",
       m3t: "追问 ? 一个问题", m3: "把同一个问题抛给每个传统，并排读它们的回答。",
@@ -533,6 +539,115 @@
     $("#learning").innerHTML = D.learning.map((x, i) => `<li><span class="n">${pad2(i + 1)}</span><b>${esc(p(x.t))}</b><p>${esc(p(x.d))}</p></li>`).join("");
   }
 
+  /* ── Hero: the city of ideas ───────────────────
+     After Mondrian's New York City I and Broadway Boogie-Woogie, drawn from the data. Each tradition is a street
+     in its colour, from its first school to its last. Every link into another tradition is an upright in the
+     colour it came from, landing as a block on the street it reached. Thinkers are small squares on their street,
+     white, or tinted with a foreign colour when they learned across a border. The most connected schools are
+     larger blocks, with an inner square in the colour of the tradition they reached most. */
+  const crossTies = (() => {
+    const m = {};
+    TI.forEach((r) => {
+      const a = TKB[r.from], b = TKB[r.to];
+      if (a && b && a.tradition !== b.tradition && r.kind !== "opp") (m[b.id] = m[b.id] || []).push(a.tradition);
+    });
+    return m;
+  })();
+  function renderHero() {
+    const box = $("#hero-art");
+    const W = box.clientWidth, H = box.clientHeight;
+    if (!W || !H) return;
+    const padX = W < 500 ? 18 : 30, top = 46, bottom = Math.min(H * 0.32, 170);
+    const X = (y) => padX + fx(y) * (W - padX * 2);
+    const gap = (H - top - bottom) / (TR.length - 1);
+    const Y = {}, LINE = W < 500 ? 7 : 9;
+    TR.forEach((tr, i) => { Y[tr.id] = top + i * gap; });
+    const crossLinks = LK.map((l, i) => ({ l, i, a: SCB[l.from], b: SCB[l.to] })).filter((x) => x.a && x.b && x.a.tradition !== x.b.tradition);
+    const deg = {};
+    LK.forEach((l) => { deg[l.from] = (deg[l.from] || 0) + 1; deg[l.to] = (deg[l.to] || 0) + 1; });
+    const delay = (x) => ((x - padX) / (W - padX * 2) * 1.6 + 0.35).toFixed(2);
+    let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+    /* Streets, named just before they begin, or above their start where there is no room */
+    const span = {}, names = [];
+    for (const tr of TR) {
+      const list = SC.filter((s) => s.tradition === tr.id);
+      const x1 = X(Math.max(MIN_YEAR, Math.min(...list.map((s) => s.start)))), x2 = X(Math.max(...list.map((s) => s.end)));
+      span[tr.id] = [x1, x2];
+      const name = p(tr.name), nw = textW(name.toUpperCase(), 700, 9) * 1.1 + 8, before = x1 - padX > nw;
+      svg += `<rect class="h-street" x="${x1.toFixed(1)}" y="${(Y[tr.id] - LINE / 2).toFixed(1)}" width="${(x2 - x1).toFixed(1)}" height="${LINE}" fill="${tr.color}"/>`;
+      names.push(`<text class="h-name${before ? " end" : ""}" x="${(before ? x1 - 7 : x1).toFixed(1)}" y="${(before ? Y[tr.id] + 3.5 : Y[tr.id] - LINE * 1.6 - 4).toFixed(1)}">${esc(name)}</text>`);
+    }
+    const weave = [];
+    /* Uprights: ideas crossing into another tradition, nudged apart where they would overlap */
+    const drawn = [];
+    crossLinks.sort((p1, p2) => Math.max(p1.a.start, p1.b.start) - Math.max(p2.a.start, p2.b.start)).forEach(({ l, i, a, b }) => {
+      let x = X(clamp(Math.max(a.start, b.start), b.start, b.end));
+      const y1 = Y[a.tradition], y2 = Y[b.tradition], lo = Math.min(y1, y2), hi = Math.max(y1, y2);
+      while (drawn.some((d) => Math.abs(d.x - x) < LINE * 0.75 && d.lo < hi && d.hi > lo)) x += LINE * 0.65;
+      x = Math.min(x, W - padX);
+      drawn.push({ x, lo, hi });
+      const c = TRB[a.tradition].color, w = Math.max(2.5, LINE * 0.42);
+      /* As in New York City I, the lines weave: every other street it crosses passes over the upright */
+      TR.forEach((tr, k) => {
+        const y = Y[tr.id];
+        if (y > lo + 1 && y < hi - 1 && x >= span[tr.id][0] && x <= span[tr.id][1] && (k + drawn.length) % 2 === 0)
+          weave.push(`<rect x="${(x - w / 2 - 1).toFixed(1)}" y="${(y - LINE / 2).toFixed(1)}" width="${(w + 2).toFixed(1)}" height="${LINE}" fill="${tr.color}" style="--d:${delay(x)}s" class="h-weave"/>`);
+      });
+      svg += `<g class="h-up" data-hl="${i}" data-s="${b.id}" style="--d:${delay(x)}s"><rect x="${(x - w / 2).toFixed(1)}" y="${lo.toFixed(1)}" width="${w.toFixed(1)}" height="${(hi - lo).toFixed(1)}" fill="${c}"/>` +
+        `<rect x="${(x - LINE * 0.65).toFixed(1)}" y="${(y2 - LINE * 0.65).toFixed(1)}" width="${(LINE * 1.3).toFixed(1)}" height="${(LINE * 1.3).toFixed(1)}" fill="${c}"/>` +
+        `<rect class="hit" x="${(x - 6).toFixed(1)}" y="${lo.toFixed(1)}" width="12" height="${(hi - lo).toFixed(1)}"/></g>`;
+    });
+    svg += weave.join("");
+    /* Thinkers: a square on their street; tinted with the colour of a tradition they learned from */
+    const s = Math.max(5, LINE - 2);
+    for (const k of TK) {
+      const x = X(floruit(k)), y = Y[k.tradition], foreign = crossTies[k.id];
+      const fill = foreign ? TRB[foreign[0]].color : "#fffdf7";
+      svg += `<rect class="h-sq" data-t="${k.id}" style="--d:${delay(x)}s" x="${(x - s / 2).toFixed(1)}" y="${(y - s / 2).toFixed(1)}" width="${s}" height="${s}" fill="${fill}"/>`;
+    }
+    /* Hubs: the most connected schools, with an inner square in the colour they reached most */
+    SC.filter((sc) => (deg[sc.id] || 0) >= 7).forEach((sc) => {
+      const out = {};
+      LK.forEach((l) => { const b = SCB[l.to]; if (l.from === sc.id && b && b.tradition !== sc.tradition) out[b.tradition] = (out[b.tradition] || 0) + 1; });
+      const best = Object.entries(out).sort((m, n) => n[1] - m[1])[0];
+      const size = LINE * (1.9 + (deg[sc.id] - 7) * 0.18), inner = size * 0.46;
+      const x = X(Math.max(sc.start, MIN_YEAR)) + size / 2, y = Y[sc.tradition];
+      svg += `<g class="h-hub" data-s="${sc.id}" style="--d:${delay(x)}s"><rect x="${(x - size / 2).toFixed(1)}" y="${(y - size / 2).toFixed(1)}" width="${size.toFixed(1)}" height="${size.toFixed(1)}" fill="${TRB[sc.tradition].color}"/>` +
+        `<rect x="${(x - inner / 2).toFixed(1)}" y="${(y - inner / 2).toFixed(1)}" width="${inner.toFixed(1)}" height="${inner.toFixed(1)}" fill="${best ? TRB[best[0]].color : "#fffdf7"}"/></g>`;
+    });
+    svg += names.join("");
+    svg += `<text class="h-time" x="${padX}" y="${(H - bottom + 26).toFixed(1)}">${esc(fmtAxis(MIN_YEAR))}</text><text class="h-time end" x="${W - padX}" y="${(H - bottom + 26).toFixed(1)}">${esc(t("now"))} →</text></svg>`;
+    box.innerHTML = svg;
+    heroCaption(null);
+  }
+  function heroCaption(el) {
+    const cap = $("#hero-cap");
+    if (!el) { cap.innerHTML = `<b>${esc(t("heroTitle"))}</b>${esc(t("heroCap"))}`; cap.style.removeProperty("--c"); return; }
+    if (el.dataset.hl != null) {
+      const l = LK[+el.dataset.hl], a = SCB[l.from], b = SCB[l.to];
+      cap.innerHTML = `<span>${esc(p(TRB[a.tradition].name))} → ${esc(p(TRB[b.tradition].name))}</span><b>${esc(p(a.name))} → ${esc(p(b.name))}</b>${esc(p(l.note))}`;
+      cap.style.setProperty("--c", TRB[a.tradition].color);
+    } else if (el.dataset.t) {
+      const k = TKB[el.dataset.t], from = crossTies[k.id];
+      cap.innerHTML = `<span>${esc(p(TRB[k.tradition].name))} · ${esc(p(k.life))}</span><b>${esc(p(k.name))}</b>${esc(p(k.role))}${from ? `<em>${esc(t("heroLearned")([...new Set(from)].map((x) => p(TRB[x].name)).join(", ")))}</em>` : ""}`;
+      cap.style.setProperty("--c", TRB[k.tradition].color);
+    } else {
+      const sc = SCB[el.dataset.s];
+      cap.innerHTML = `<span>${esc(p(TRB[sc.tradition].name))} · ${esc(p(sc.dates))}</span><b>${esc(p(sc.name))}</b>${esc(p(sc.idea))}`;
+      cap.style.setProperty("--c", TRB[sc.tradition].color);
+    }
+  }
+  let heroHot = null;
+  $("#hero-art").addEventListener("pointerover", (ev) => {
+    const el = ev.target.closest(".h-up, .h-sq, .h-hub");
+    if (el === heroHot) return;
+    if (heroHot) heroHot.classList.remove("hot");
+    heroHot = el;
+    if (el) el.classList.add("hot");
+    heroCaption(el);
+  });
+  $("#hero-art").addEventListener("pointerleave", () => { if (heroHot) heroHot.classList.remove("hot"); heroHot = null; heroCaption(null); });
+
   /* ── Detail panel ──────────────────────────── */
   const detail = $("#detail");
   const swatch = (tr) => `<span class="sw" style="${trVars(tr)}"></span>`;
@@ -867,10 +982,11 @@
   }
 
   let resizeT = 0, lastW = innerWidth;
-  addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(() => { if (Math.abs(innerWidth - lastW) > 60) { lastW = innerWidth; renderLineage(); renderNet(); renderQuestions(); } }, 200); });
+  addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(() => { if (Math.abs(innerWidth - lastW) > 60) { lastW = innerWidth; renderHero(); renderLineage(); renderNet(); renderQuestions(); } }, 200); });
 
   function renderAll() {
     applyStatic();
+    renderHero();
     renderLineageBar();
     renderLineage();
     renderNetBar();

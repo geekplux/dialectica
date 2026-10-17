@@ -58,7 +58,7 @@
   document.head.appendChild(s);
 })();
 </script>
-<link rel="stylesheet" href="assets/styles.css?v=e259310d21">
+<link rel="stylesheet" href="assets/styles.css?v=be52804b86">
 </head>
 <body>
 <header class="topbar">
@@ -96,27 +96,9 @@
         <a class="scroll-cue" href="#lineage" data-i18n="cue">Begin with the family tree</a>
       </div>
     </div>
-    <div class="hero-graphic" aria-hidden="true">
-      <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="520" fill="#fffdf7"/>
-        <rect x="0" y="0" width="150" height="190" fill="#d52b1e"/>
-        <rect x="262" y="0" width="138" height="96" fill="#f3c623"/>
-        <rect x="262" y="250" width="138" height="150" fill="#1d4ed8"/>
-        <rect x="0" y="404" width="96" height="116" fill="#f3c623"/>
-        <rect x="160" y="404" width="96" height="116" fill="#141414"/>
-        <rect x="150" y="96" width="112" height="60" fill="#e9e4d8"/>
-        <g fill="#141414">
-          <rect x="146" y="0" width="10" height="520"/>
-          <rect x="256" y="0" width="10" height="520"/>
-          <rect x="0" y="186" width="156" height="10"/>
-          <rect x="146" y="92" width="254" height="8"/>
-          <rect x="146" y="246" width="254" height="10"/>
-          <rect x="0" y="400" width="400" height="10"/>
-          <rect x="92" y="400" width="8" height="120"/>
-          <rect x="146" y="320" width="120" height="8"/>
-        </g>
-      </svg>
-      <p class="graphic-caption" data-i18n="heroCap">Thesis. Objection. Reply. The conversation is 3,000 years long.</p>
+    <div class="hero-graphic">
+      <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+      <p class="graphic-caption" id="hero-cap" aria-live="polite"></p>
     </div>
   </section>
 
@@ -249,6 +231,6 @@
 <script src="data/schools.js"></script>
 <script src="data/thinkers.js"></script>
 <script src="data/links.js"></script>
-<script src="assets/app.js?v=78cb7462e1"></script>
+<script src="assets/app.js?v=d62decc070"></script>
 </body>
 </html>

@@ -95,13 +95,31 @@ button { cursor: pointer; }
 .hero-meta { display: flex; align-items: end; justify-content: space-between; gap: 24px; font-size: 13px; font-weight: 700; }
 .scroll-cue { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; white-space: nowrap; }
 .scroll-cue::before { content: "→"; font-size: 24px; color: var(--red); }
-.hero-graphic { position: relative; min-height: 520px; overflow: hidden; background: var(--white); }
-.hero-graphic svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.graphic-caption { position: absolute; z-index: 5; left: 24px; right: 24px; bottom: 24px; padding: 16px; border: 3px solid var(--ink); background: var(--paper); font-weight: 800; font-size: 13px; max-width: 300px; }
+/* The city of ideas (drawn by renderHero in app.js): streets, uprights, squares, and a caption card */
+.hero-graphic { position: relative; min-height: 560px; overflow: hidden; background: var(--white); }
+.hero-art { position: absolute; inset: 0; }
+.hero-art svg { display: block; }
+.h-name { font: 700 9px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-2); stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; paint-order: stroke; pointer-events: none; }
+:lang(zh) .h-name { font-size: 10px; letter-spacing: .04em; }
+.h-time { font: 700 10px/1 var(--f-mono); fill: var(--muted); }
+.h-time.end, .h-name.end { text-anchor: end; }
+.h-weave { animation: h-in .5s ease both; animation-delay: var(--d, 0s); pointer-events: none; }
+.h-street { transform-box: fill-box; transform-origin: left center; animation: h-grow 1.4s var(--ease) both; }
+.h-up, .h-sq, .h-hub { animation: h-in .5s ease both; animation-delay: var(--d, 0s); cursor: pointer; }
+.h-up .hit { fill: transparent; }
+.h-up.hot rect:not(.hit), .h-hub.hot rect:first-child, .h-sq.hot { stroke: var(--ink); stroke-width: 2px; }
+.h-sq { stroke: rgba(20,20,20,.25); stroke-width: .75px; }
+@keyframes h-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes h-in { from { opacity: 0; } to { opacity: 1; } }
+.graphic-caption { position: absolute; z-index: 5; left: 24px; right: 24px; bottom: 24px; min-height: 96px; padding: 12px 16px 14px; border: 3px solid var(--ink); border-left: 10px solid var(--c, var(--ink)); background: var(--paper); font-size: 13px; line-height: 1.4; max-width: 440px; pointer-events: none; }
+.graphic-caption span { display: block; font: 700 10px/1.3 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--blue-deep); margin-bottom: 4px; }
+.graphic-caption b { display: block; font: 800 19px/1.1 var(--f-display); margin-bottom: 5px; }
+:lang(zh) .graphic-caption b { font-family: var(--f-body); font-size: 17px; }
+.graphic-caption em { display: block; font-style: normal; font-weight: 700; margin-top: 5px; }
 @media (max-width: 900px) {
   .masthead { grid-template-columns: minmax(0, 1fr); min-height: 0; }
   .hero-copy { border-right: 0; border-bottom: 8px solid var(--ink); min-height: 560px; }
-  .hero-graphic { min-height: 340px; }
+  .hero-graphic { min-height: 520px; }
 }
 @media (max-width: 560px) {
   .masthead h1 { font-size: clamp(56px, 19vw, 104px); }
