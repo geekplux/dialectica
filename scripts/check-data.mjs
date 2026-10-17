@@ -2,10 +2,12 @@
 // Validates public/data/core.js, schools.js, thinkers.js and links.js (ids, links, bilingual text, years),
 // the counts quoted in public/index.html, and the ?v= cache stamps.
 // Usage: node scripts/check-data.mjs [--warnings]   (no dependencies)
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import { staleStamps } from "./stamp-assets.mjs";
+import { SITE, ROOT, portraitPath, contentHash } from "./lib/data.mjs";
+import { creditsMarkdown } from "./lib/credits.mjs";
 
 const sandbox = { window: {} };
 for (const f of ["core", "schools", "thinkers", "links"]) {
@@ -92,7 +94,18 @@ for (const t of D.thinkers) {
     if (w.y != null && !year(w.y)) fail(at, `works[${i}] has a bad year`);
   }
   if (typeof t.wiki !== "string" || !t.wiki.trim()) fail(at, "wiki must be an article title");
+  /* Hosted portraits: written by scripts/fetch-portraits.mjs from `c`, never by hand */
+  if (t.c && !t.portrait) fail(at, "has a Commons file (c) but no portrait: run node scripts/fetch-portraits.mjs");
+  if (t.portrait) {
+    const big = SITE + portraitPath(t.id), small = SITE + portraitPath(t.id, true);
+    if (!t.c) fail(at, "has a portrait but no Commons file (c)");
+    if (!existsSync(big) || !existsSync(small)) fail(at, "portrait files are missing: run node scripts/fetch-portraits.mjs");
+    else if (contentHash(readFileSync(big), readFileSync(small)) !== t.portrait.v) fail(at, "portrait hash is stale: run node scripts/fetch-portraits.mjs");
+    for (const f of ["author", "license", "page"]) if (!t.portrait[f]) fail(at, `portrait needs ${f}`);
+  }
+  if (t.focus != null && !/^\d+% \d+%$/.test(t.focus)) fail(at, "focus must look like \"30% 45%\"");
 }
+if (readFileSync(ROOT + "CREDITS.md", "utf8") !== creditsMarkdown(D)) fail("CREDITS.md", "is stale: run node scripts/fetch-portraits.mjs");
 
 /* Links and ties */
 const seen = new Set();
