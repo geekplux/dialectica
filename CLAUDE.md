@@ -41,9 +41,11 @@ Read README.md for the data model and file layout. These are the rules that are 
 
 ## Analytics and privacy
 
-- GA4 is wired as in Worldlines (Consent Mode v2, denied by default, host-only cookies, `pageView()` after render,
-  `track()` a no-op without `gtag`) but stays off until `GA_ID` in `index.html` is set. Never send typed search text
-  or personal data in event parameters.
+- GA4 (`G-1MGF28FKRC`) loads on `dialectica.geekplux.org` only, with Consent Mode v2 defaulting to denied. Keep the
+  hostname guard, keep ads storage denied, keep cookies host-only (`cookie_domain: "none"`), and never send personal
+  data or typed search text in event parameters. Page views go through `pageView()` after render; events through
+  `track()`, a no-op wherever `gtag` is not defined. Keep the GA4 setting "Page changes based on browser history
+  events" off.
 
 ## Before every commit
 

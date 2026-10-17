@@ -48,7 +48,7 @@
    Until the visitor accepts in the consent bar (assets/app.js), analytics_storage stays "denied".
    cookie_domain "none" keeps the cookies host-only, and app.js sends the page_view after render. */
 (function () {
-  var GA_ID = "";
+  var GA_ID = "G-1MGF28FKRC";
   if (!GA_ID || location.hostname !== "dialectica.geekplux.org") return;
   var choice = null;
   try { choice = localStorage.getItem("dialectica-consent"); } catch (e) { /* storage blocked */ }

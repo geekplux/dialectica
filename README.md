@@ -111,7 +111,7 @@ Intended for **https://dialectica.geekplux.org/** on **Cloudflare Workers Static
 
 ## Analytics
 
-The Google Analytics setup (Consent Mode v2, host-only cookies, page views sent after render, no typed search text) is copied from Worldlines but **inactive**: `GA_ID` in `public/index.html` is empty. Set it to a GA4 measurement ID for this site to turn it on; it then runs on `dialectica.geekplux.org` only.
+Google Analytics 4 (`G-1MGF28FKRC`) runs on **dialectica.geekplux.org only**, never locally or on preview URLs, set up as in Worldlines. It uses Consent Mode v2: until a visitor accepts in the consent bar, `analytics_storage` is denied, so GA receives cookieless pings and sets no cookies. Accepted cookies are host-only (`cookie_domain: "none"`), so they are not shared with Art-isms, Worldlines or any other `*.geekplux.org` site, and declining deletes any `_ga` cookies. Page views are sent by `app.js` after the page has rendered, without the hash. In the GA4 property, keep **Admin → Data streams → Enhanced measurement → Page views → Show advanced settings → "Page changes based on browser history events"** turned off, or each `?lang` switch logs an extra page view. Search sends only the number of matches, never the typed text.
 
 ## Caveats
 
