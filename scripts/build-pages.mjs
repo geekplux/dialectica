@@ -44,6 +44,7 @@ const S = {
     sources: "Sources", about: "About", kind: { thinker: "Thinker", school: "School", link: "Line between schools", tie: "Tie between thinkers" },
     fDates: "Schools rarely begin or end in a single year, and many ancient dates are traditional or disputed.",
     fProj: `A static site with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.org/">Art-isms</a> and <a href="https://worldlines.geekplux.org/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.`,
+    sisters: "Sister atlases", sistersT: "Three atlases, one grid",
     consent: "This site uses Google Analytics to count visits. Allow it to set analytics cookies?", yes: "Accept", no: "Decline", cookies: "Cookie settings",
     ogLocale: "en_US"
   },
@@ -66,6 +67,7 @@ const S = {
     sources: "来源", about: "对象", kind: { thinker: "思想家", school: "学派", link: "学派之间的连线", tie: "思想家之间的关系" },
     fDates: "学派很少在某一年突然开始或结束；许多古代年代只是传统说法，或尚有争议。",
     fProj: `一个静态网站，全部内容存放在中英双语数据文件中。它是 <a href="https://artisms.geekplux.org/">艺术流派志</a> 与 <a href="https://worldlines.geekplux.org/">世界线</a> 的姊妹项目。欢迎在 <a href="https://github.com/geekplux/dialectica">GitHub</a> 上提出修订。`,
+    sisters: "姊妹图谱", sistersT: "三部图谱，一张网格",
     consent: "本站使用 Google Analytics 统计访问量。是否允许设置统计 Cookie？", yes: "接受", no: "拒绝", cookies: "Cookie 设置",
     ogLocale: "zh_CN"
   }
@@ -92,6 +94,21 @@ const factsAbout = (key) => FACTS.filter((f) => f.about === key);
 const paras = (s) => esc(s).split(/\n\n+/).map((p) => `<p>${p}</p>`).join("");
 const portraitUrl = (k, small) => `/${portraitPath(k.id, small)}?v=${k.portrait.v}`;
 
+/* The three sister atlases, in the order they were made; this one is solid ink */
+const SISTERS = [
+  { id: "artisms", name: { en: "Art-isms", zh: "艺术流派志" }, line: { en: "40 art styles across 45,000 years", zh: "四万五千年里的40个艺术流派" } },
+  { id: "worldlines", name: { en: "Worldlines", zh: "世界线" }, line: { en: "26 countries and 8 regions across 15,000 years", zh: "一万五千年里的26个国家与8个地区" } },
+  { id: "dialectica", name: { en: "Dialectica", zh: "思辨谱" }, line: { en: "72 schools and 204 thinkers across 8 traditions", zh: "8个传统中的72个学派与204位思想家" } }
+];
+const MARK = {
+  artisms: '<svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="13" height="14" fill="#d52b1e"/><rect x="17" y="2" width="7" height="14" fill="#fffdf7"/><rect x="2" y="18" width="6" height="6" fill="#1d4ed8"/><rect x="10" y="18" width="14" height="6" fill="#f3c623"/></svg>',
+  worldlines: '<svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="22" height="5" fill="#d52b1e"/><rect x="2" y="9" width="8" height="6" fill="#fffdf7"/><rect x="12" y="9" width="12" height="6" fill="#1d4ed8"/><rect x="2" y="17" width="15" height="7" fill="#f3c623"/><rect x="19" y="17" width="5" height="7" fill="#fffdf7"/></svg>',
+  dialectica: '<svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="10" height="13" fill="#d52b1e"/><rect x="14" y="2" width="10" height="6" fill="#fffdf7"/><rect x="14" y="10" width="10" height="14" fill="#1d4ed8"/><rect x="2" y="17" width="10" height="7" fill="#f3c623"/></svg>'
+};
+const sisters = (L) => `<nav class="sisters" aria-label="${esc(S[L].sisters)}"><div class="wrap pad"><p class="micro">${esc(S[L].sistersT)}</p><div class="sisters-row">${SISTERS.map((s) =>
+  s.id === "dialectica" ? `<span class="sister here" aria-current="page">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></span>`
+  : `<a class="sister" href="https://${s.id}.geekplux.org/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div></div></nav>`;
+
 /* ── Page shell ── */
 function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogType = "article" }) {
   const W = S[L];
@@ -110,6 +127,8 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
 <meta name="theme-color" content="#fffdf7">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="${esc(W.site)}">
 <meta property="og:url" content="${ORIGIN}${path}">
@@ -161,6 +180,7 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
 ${body}
 </main>
 <footer>
+${sisters(L)}
   <div class="wrap pad">
     <div><h3>${esc(W.site)}</h3><p>${esc(W.fDates)}</p></div>
     <div><h3>${esc(W.factCheck)} · ${esc(W.credits)}</h3><p><a href="${pre(L)}/fact-check/">${esc(W.factCheck)}</a> · <a href="${pre(L)}/credits/">${esc(W.credits)}</a> · <a href="${pre(L)}/schools/">${esc(W.allSchools)}</a> · <a href="${pre(L)}/thinkers/">${esc(W.allThinkers)}</a></p></div>

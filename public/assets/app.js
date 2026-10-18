@@ -20,6 +20,7 @@
       docDesc: () => `A Mondrian-style atlas of philosophy. Follow ${SC.length} schools and ${TK.length} thinkers across ${TR.length} traditions and 3,000 years: where each idea came from, the argument behind it, who taught and who answered whom. In English and Chinese.`,
       brand: "Dialectica", navLineage: "Lineage", navThinkers: "Thinkers", navCrossings: "Crossings", navQuestions: "Questions", navSchools: "Schools", navLearn: "How to read", search: "Search",
       star: "Star", starTitle: "Star Dialectica on GitHub",
+      ariaSisters: "Sister atlases", sistersT: "Three atlases, one grid", sArtisms: "Art-isms", sArtismsD: "40 art styles across 45,000 years", sWorldlines: "Worldlines", sWorldlinesD: "26 countries and 8 regions across 15,000 years", sDialectica: "Dialectica", sDialecticaD: "72 schools and 204 thinkers across 8 traditions",
       kicker: "A family tree of philosophy, East and West",
       h1a: "DIALEC", h1b: "TICA",
       dek: "Every idea is <strong>an answer to an older one</strong>. Follow the arguments: who inherited them, who turned against them, and why.",
@@ -89,6 +90,7 @@
       docDesc: () => `蒙德里安风格的哲学图谱。沿着${TR.length}个传统、三千年的时间，追踪${SC.length}个学派与${TK.length}位思想家：每种思想从哪里来、背后的道理是什么、谁师承谁、谁又反驳了谁。中英双语。`,
       brand: "思辨谱", navLineage: "谱系", navThinkers: "思想家", navCrossings: "交汇", navQuestions: "问题", navSchools: "学派", navLearn: "阅读方法", search: "搜索",
       star: "星标", starTitle: "在 GitHub 上给思辨谱加星标",
+      ariaSisters: "姊妹图谱", sistersT: "三部图谱，一张网格", sArtisms: "艺术流派志", sArtismsD: "四万五千年里的40个艺术流派", sWorldlines: "世界线", sWorldlinesD: "一万五千年里的26个国家与8个地区", sDialectica: "思辨谱", sDialecticaD: "8个传统中的72个学派与204位思想家",
       kicker: "一部东西方哲学的家族谱系",
       h1a: "思辨", h1b: "谱",
       dek: "每一种思想，都是<strong>对更早思想的回答</strong>。沿着论证走下去：谁继承了它，谁反对了它，又是为什么。",
@@ -292,6 +294,7 @@
     $$("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
     $$(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
     $("#gh-star").title = t("starTitle");
+    $$("a[data-sister]").forEach((a) => { a.href = `https://${a.dataset.sister}.geekplux.org/${lang === "zh" ? "?lang=zh" : ""}`; });
     $("#stats").textContent = tf("stats");
     $("#search-input").placeholder = t("searchPh");
     $("#lin-range").textContent = tf("linRange");
@@ -972,6 +975,7 @@
       $$(".gx-scroll").forEach((sc, i) => { sc.scrollLeft = keep[i] * sc.scrollWidth; });
       return;
     }
+    if ((el = g("a[data-sister]"))) { track("select_content", { content_type: "sister", item_id: el.dataset.sister }); return; }
     if ((el = g(".lang button"))) { if (el.dataset.lang !== lang) { lang = el.dataset.lang; store.set("lang", lang); setParam("lang", lang === "zh" ? "zh" : null); renderAll(); pageView(); track("select_content", { content_type: "language", item_id: lang }); } return; }
     if ((el = g("[data-consent]"))) { setConsent(el.dataset.consent); return; }
     if (g("#consent-open")) { $("#consent").hidden = false; $("#consent [data-consent]").focus(); return; }
