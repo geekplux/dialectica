@@ -42,6 +42,7 @@ Read README.md for the data model and file layout. These are the rules that are 
 - A name always sits on its block: when a school is too short-lived to hold its name, the block continues in a white
   cell. Nothing may extend past the end of a map.
 - Hairlines inside sections; heavy rules only between sections.
+- The footer opens with the sister-atlas strip: Art-isms, Worldlines, Dialectica, in that order, with the site you are on in solid ink. The same markup, styles and words live in all three repos; change them together.
 - Check every change at desktop width and at 390px, in both languages: no horizontal page scroll, no console errors.
 
 ## Analytics and privacy
