@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dialectica.geekplux.org/sitemap.xml
+Sitemap: https://dialectica.geekplux.com/sitemap.xml

@@ -66,7 +66,7 @@
       fImgT: "About the images",
       fImg: "Portraits are the lead images of English Wikipedia articles, shown only when the file is on Wikimedia Commons. Every panel links to its source; check the file page before reusing an image.",
       fProjT: "The project",
-      fProj: "A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href=\"https://artisms.geekplux.org/\">Art-isms</a> and <a href=\"https://worldlines.geekplux.org/\">Worldlines</a>. Corrections are welcome on <a href=\"https://github.com/geekplux/dialectica\">GitHub</a>.",
+      fProj: "A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href=\"https://artisms.geekplux.com/\">Art-isms</a> and <a href=\"https://worldlines.geekplux.com/\">Worldlines</a>. Corrections are welcome on <a href=\"https://github.com/geekplux/dialectica\">GitHub</a>.",
       consentText: "This site uses Google Analytics to count visits. Allow it to set analytics cookies?", consentYes: "Accept", consentNo: "Decline", cookieSettings: "Cookie settings",
       kSchoolTop: "School · lineage", kThinkerTop: "Thinker · circle",
       question: "The question", origin: "Why it arose", reasoning: "The reasoning", claims: "Key claims", legacy: "What it left",
@@ -135,7 +135,7 @@
       fImgT: "关于图片",
       fImg: "人物图像取自英文维基百科条目的首图，且仅在文件位于维基共享资源时显示。每张图都链接到来源页；转载前请先查看文件页的许可信息。",
       fProjT: "关于项目",
-      fProj: "一个无需构建的静态网站：HTML、CSS 与原生 JavaScript，全部内容存放在中英双语数据文件中。它是 <a href=\"https://artisms.geekplux.org/\">艺术流派志</a> 与 <a href=\"https://worldlines.geekplux.org/\">世界线</a> 的姊妹项目。欢迎在 <a href=\"https://github.com/geekplux/dialectica\">GitHub</a> 上提出修订。",
+      fProj: "一个无需构建的静态网站：HTML、CSS 与原生 JavaScript，全部内容存放在中英双语数据文件中。它是 <a href=\"https://artisms.geekplux.com/\">艺术流派志</a> 与 <a href=\"https://worldlines.geekplux.com/\">世界线</a> 的姊妹项目。欢迎在 <a href=\"https://github.com/geekplux/dialectica\">GitHub</a> 上提出修订。",
       consentText: "本站使用 Google Analytics 统计访问量。是否允许设置统计 Cookie？", consentYes: "接受", consentNo: "拒绝", cookieSettings: "Cookie 设置",
       kSchoolTop: "学派 · 谱系", kThinkerTop: "思想家 · 关系",
       question: "它的问题", origin: "为何产生", reasoning: "背后的道理", claims: "核心主张", legacy: "留下了什么",
@@ -288,13 +288,13 @@
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     document.title = t("docTitle");
     $('meta[name="description"]').setAttribute("content", tf("docDesc"));
-    $('link[rel="canonical"]').setAttribute("href", "https://dialectica.geekplux.org/" + (lang === "zh" ? "?lang=zh" : ""));
+    $('link[rel="canonical"]').setAttribute("href", "https://dialectica.geekplux.com/" + (lang === "zh" ? "?lang=zh" : ""));
     $$("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
     $$("[data-i18n-html]").forEach((el) => { el.innerHTML = t(el.dataset.i18nHtml); });
     $$("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
     $$(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
     $("#gh-star").title = t("starTitle");
-    $$("a[data-sister]").forEach((a) => { a.href = `https://${a.dataset.sister}.geekplux.org/${lang === "zh" ? "?lang=zh" : ""}`; });
+    $$("a[data-sister]").forEach((a) => { a.href = `https://${a.dataset.sister}.geekplux.com/${lang === "zh" ? "?lang=zh" : ""}`; });
     $("#stats").textContent = tf("stats");
     $("#search-input").placeholder = t("searchPh");
     $("#lin-range").textContent = tf("linRange");

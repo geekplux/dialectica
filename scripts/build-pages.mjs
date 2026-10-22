@@ -14,7 +14,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadData, SITE, NOW, portraitPath } from "./lib/data.mjs";
 
-const ORIGIN = "https://dialectica.geekplux.org";
+const ORIGIN = "https://dialectica.geekplux.com";
 const GA_ID = "G-1MGF28FKRC";
 const D = loadData();
 const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
@@ -43,7 +43,7 @@ const S = {
     creditsTitle: "Image credits", creditsLede: (n) => `${n} portraits are hosted with this site, resized from files on Wikimedia Commons. Each file page has the full licence and source details; check it before reusing an image. Other pictures in the atlas are loaded from Wikipedia when viewed and credited beside them.`,
     sources: "Sources", about: "About", kind: { thinker: "Thinker", school: "School", link: "Line between schools", tie: "Tie between thinkers" },
     fDates: "Schools rarely begin or end in a single year, and many ancient dates are traditional or disputed.",
-    fProj: `A static site with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.org/">Art-isms</a> and <a href="https://worldlines.geekplux.org/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.`,
+    fProj: `A static site with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.com/">Art-isms</a> and <a href="https://worldlines.geekplux.com/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.`,
     sisters: "Sister atlases", sistersT: "Three atlases, one grid",
     consent: "This site uses Google Analytics to count visits. Allow it to set analytics cookies?", yes: "Accept", no: "Decline", cookies: "Cookie settings",
     ogLocale: "en_US"
@@ -66,7 +66,7 @@ const S = {
     creditsTitle: "图片来源", creditsLede: (n) => `本站托管了${n}幅人物图像，均由维基共享资源上的文件缩放而来。每个文件页都有完整的许可与来源信息，转载前请先查看。图谱中的其他图片在浏览时从维基百科加载，并在旁边注明来源。`,
     sources: "来源", about: "对象", kind: { thinker: "思想家", school: "学派", link: "学派之间的连线", tie: "思想家之间的关系" },
     fDates: "学派很少在某一年突然开始或结束；许多古代年代只是传统说法，或尚有争议。",
-    fProj: `一个静态网站，全部内容存放在中英双语数据文件中。它是 <a href="https://artisms.geekplux.org/">艺术流派志</a> 与 <a href="https://worldlines.geekplux.org/">世界线</a> 的姊妹项目。欢迎在 <a href="https://github.com/geekplux/dialectica">GitHub</a> 上提出修订。`,
+    fProj: `一个静态网站，全部内容存放在中英双语数据文件中。它是 <a href="https://artisms.geekplux.com/">艺术流派志</a> 与 <a href="https://worldlines.geekplux.com/">世界线</a> 的姊妹项目。欢迎在 <a href="https://github.com/geekplux/dialectica">GitHub</a> 上提出修订。`,
     sisters: "姊妹图谱", sistersT: "三部图谱，一张网格",
     consent: "本站使用 Google Analytics 统计访问量。是否允许设置统计 Cookie？", yes: "接受", no: "拒绝", cookies: "Cookie 设置",
     ogLocale: "zh_CN"
@@ -107,7 +107,7 @@ const MARK = {
 };
 const sisters = (L) => `<nav class="sisters" aria-label="${esc(S[L].sisters)}"><div class="wrap pad"><p class="micro">${esc(S[L].sistersT)}</p><div class="sisters-row">${SISTERS.map((s) =>
   s.id === "dialectica" ? `<span class="sister here" aria-current="page">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></span>`
-  : `<a class="sister" href="https://${s.id}.geekplux.org/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div></div></nav>`;
+  : `<a class="sister" href="https://${s.id}.geekplux.com/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div></div></nav>`;
 
 /* ── Page shell ── */
 function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogType = "article" }) {
@@ -140,10 +140,10 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
 <meta name="twitter:card" content="${image ? "summary" : "summary_large_image"}">
 <script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, "\\u003c")}</script>
 <script>
-/* Google Analytics 4 with Consent Mode v2, on the production domain only (see index.html); page.js sends the page view */
+/* Google Analytics 4 with Consent Mode v2, on the production domains only (see index.html); page.js sends the page view */
 (function () {
   var GA_ID = "${GA_ID}";
-  if (location.hostname !== "dialectica.geekplux.org") return;
+  if (!/^dialectica\\.geekplux\\.(com|org)$/.test(location.hostname)) return;
   var choice = null;
   try { choice = localStorage.getItem("dialectica-consent"); } catch (e) { /* storage blocked */ }
   window.dataLayer = window.dataLayer || [];

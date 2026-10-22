@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dialectica: a family tree of philosophy, East and West</title>
 <meta name="description" content="A Mondrian-style atlas of philosophy. Follow 72 schools and 204 thinkers across 8 traditions and 3,000 years: where each idea came from, the argument behind it, who taught and who answered whom. In English and Chinese.">
-<link rel="canonical" href="https://dialectica.geekplux.org/">
-<link rel="alternate" hreflang="en" href="https://dialectica.geekplux.org/">
-<link rel="alternate" hreflang="zh-Hans" href="https://dialectica.geekplux.org/?lang=zh">
-<link rel="alternate" hreflang="x-default" href="https://dialectica.geekplux.org/">
+<link rel="canonical" href="https://dialectica.geekplux.com/">
+<link rel="alternate" hreflang="en" href="https://dialectica.geekplux.com/">
+<link rel="alternate" hreflang="zh-Hans" href="https://dialectica.geekplux.com/?lang=zh">
+<link rel="alternate" hreflang="x-default" href="https://dialectica.geekplux.com/">
 <meta name="theme-color" content="#fffdf7">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -16,10 +16,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dialectica">
-<meta property="og:url" content="https://dialectica.geekplux.org/">
+<meta property="og:url" content="https://dialectica.geekplux.com/">
 <meta property="og:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta property="og:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from, the reasoning behind it, and who answered whom. In English and Chinese.">
-<meta property="og:image" content="https://dialectica.geekplux.org/og.png">
+<meta property="og:image" content="https://dialectica.geekplux.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Dialectica: the title beside a Mondrian-style city of coloured streets, one per tradition of philosophy, crossed by the ideas that passed between them.">
@@ -28,14 +28,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta name="twitter:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from and who answered whom.">
-<meta name="twitter:image" content="https://dialectica.geekplux.org/og.png">
+<meta name="twitter:image" content="https://dialectica.geekplux.com/og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Dialectica",
   "alternateName": "思辨谱",
-  "url": "https://dialectica.geekplux.org/",
+  "url": "https://dialectica.geekplux.com/",
   "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
   "inLanguage": ["en", "zh-Hans"],
   "isAccessibleForFree": true,
@@ -46,12 +46,13 @@
 }
 </script>
 <script>
-/* Google Analytics 4 with Consent Mode v2, on the production domain only, and only once GA_ID is set.
+/* Google Analytics 4 with Consent Mode v2, on the production domains only (.com, and .org until it redirects),
+   and only once GA_ID is set.
    Until the visitor accepts in the consent bar (assets/app.js), analytics_storage stays "denied".
    cookie_domain "none" keeps the cookies host-only, and app.js sends the page_view after render. */
 (function () {
   var GA_ID = "G-1MGF28FKRC";
-  if (!GA_ID || location.hostname !== "dialectica.geekplux.org") return;
+  if (!GA_ID || !/^dialectica\.geekplux\.(com|org)$/.test(location.hostname)) return;
   var choice = null;
   try { choice = localStorage.getItem("dialectica-consent"); } catch (e) { /* storage blocked */ }
   window.dataLayer = window.dataLayer || [];
@@ -210,8 +211,8 @@
     <div class="wrap pad">
       <p class="micro" data-i18n="sistersT">Three atlases, one grid</p>
       <div class="sisters-row">
-      <a class="sister" href="https://artisms.geekplux.org/" data-sister="artisms"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="13" height="14" fill="#d52b1e"/><rect x="17" y="2" width="7" height="14" fill="#fffdf7"/><rect x="2" y="18" width="6" height="6" fill="#1d4ed8"/><rect x="10" y="18" width="14" height="6" fill="#f3c623"/></svg><b data-i18n="sArtisms">Art-isms</b><span data-i18n="sArtismsD">40 art styles across 45,000 years</span></a>
-      <a class="sister" href="https://worldlines.geekplux.org/" data-sister="worldlines"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="22" height="5" fill="#d52b1e"/><rect x="2" y="9" width="8" height="6" fill="#fffdf7"/><rect x="12" y="9" width="12" height="6" fill="#1d4ed8"/><rect x="2" y="17" width="15" height="7" fill="#f3c623"/><rect x="19" y="17" width="5" height="7" fill="#fffdf7"/></svg><b data-i18n="sWorldlines">Worldlines</b><span data-i18n="sWorldlinesD">26 countries and 8 regions across 15,000 years</span></a>
+      <a class="sister" href="https://artisms.geekplux.com/" data-sister="artisms"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="13" height="14" fill="#d52b1e"/><rect x="17" y="2" width="7" height="14" fill="#fffdf7"/><rect x="2" y="18" width="6" height="6" fill="#1d4ed8"/><rect x="10" y="18" width="14" height="6" fill="#f3c623"/></svg><b data-i18n="sArtisms">Art-isms</b><span data-i18n="sArtismsD">40 art styles across 45,000 years</span></a>
+      <a class="sister" href="https://worldlines.geekplux.com/" data-sister="worldlines"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="22" height="5" fill="#d52b1e"/><rect x="2" y="9" width="8" height="6" fill="#fffdf7"/><rect x="12" y="9" width="12" height="6" fill="#1d4ed8"/><rect x="2" y="17" width="15" height="7" fill="#f3c623"/><rect x="19" y="17" width="5" height="7" fill="#fffdf7"/></svg><b data-i18n="sWorldlines">Worldlines</b><span data-i18n="sWorldlinesD">26 countries and 8 regions across 15,000 years</span></a>
       <span class="sister here" aria-current="page"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="10" height="13" fill="#d52b1e"/><rect x="14" y="2" width="10" height="6" fill="#fffdf7"/><rect x="14" y="10" width="10" height="14" fill="#1d4ed8"/><rect x="2" y="17" width="10" height="7" fill="#f3c623"/></svg><b data-i18n="sDialectica">Dialectica</b><span data-i18n="sDialecticaD">72 schools and 204 thinkers across 8 traditions</span></span>
       </div>
     </div>
@@ -227,7 +228,7 @@
     </div>
     <div>
       <h3 data-i18n="fProjT">The project</h3>
-      <p data-i18n-html="fProj">A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.org/">Art-isms</a> and <a href="https://worldlines.geekplux.org/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.</p>
+      <p data-i18n-html="fProj">A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.com/">Art-isms</a> and <a href="https://worldlines.geekplux.com/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.</p>
       <p><button type="button" class="linkish" id="consent-open" data-i18n="cookieSettings" hidden>Cookie settings</button></p>
     </div>
   </div>
@@ -261,6 +262,6 @@
 <script src="data/thinkers.js"></script>
 <script src="data/links.js"></script>
 <script src="data/facts.js"></script>
-<script src="assets/app.js?v=743002be14"></script>
+<script src="assets/app.js?v=f5a2fb2415"></script>
 </body>
 </html>
