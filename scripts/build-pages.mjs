@@ -45,6 +45,7 @@ const S = {
     fDates: "Schools rarely begin or end in a single year, and many ancient dates are traditional or disputed.",
     fProj: `A static site with all content in bilingual data files. A sibling of <a href="https://artisms.geekplux.com/">Art-isms</a> and <a href="https://worldlines.geekplux.com/">Worldlines</a>. Corrections are welcome on <a href="https://github.com/geekplux/dialectica">GitHub</a>.`,
     sisters: "Sister atlases", sistersT: "Three atlases, one grid",
+    sistersBy: `Made by <a href="https://geekplux.com/">GeekPlux</a>. I built these atlases out of my own curiosity, mainly to learn from them myself.`,
     consent: "This site uses Google Analytics to count visits. Allow it to set analytics cookies?", yes: "Accept", no: "Decline", cookies: "Cookie settings",
     ogLocale: "en_US"
   },
@@ -68,6 +69,7 @@ const S = {
     fDates: "学派很少在某一年突然开始或结束；许多古代年代只是传统说法，或尚有争议。",
     fProj: `一个静态网站，全部内容存放在中英双语数据文件中。它是 <a href="https://artisms.geekplux.com/">艺术流派志</a> 与 <a href="https://worldlines.geekplux.com/">世界线</a> 的姊妹项目。欢迎在 <a href="https://github.com/geekplux/dialectica">GitHub</a> 上提出修订。`,
     sisters: "姊妹图谱", sistersT: "三部图谱，一张网格",
+    sistersBy: `由 <a href="https://geekplux.com/">GeekPlux</a> 制作。出于个人兴趣，我做了这几部图谱，主要是为了自己学习。`,
     consent: "本站使用 Google Analytics 统计访问量。是否允许设置统计 Cookie？", yes: "接受", no: "拒绝", cookies: "Cookie 设置",
     ogLocale: "zh_CN"
   }
@@ -107,7 +109,7 @@ const MARK = {
 };
 const sisters = (L) => `<nav class="sisters" aria-label="${esc(S[L].sisters)}"><div class="wrap pad"><p class="micro">${esc(S[L].sistersT)}</p><div class="sisters-row">${SISTERS.map((s) =>
   s.id === "dialectica" ? `<span class="sister here" aria-current="page">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></span>`
-  : `<a class="sister" href="https://${s.id}.geekplux.com/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div></div></nav>`;
+  : `<a class="sister" href="https://${s.id}.geekplux.com/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div><p class="sisters-by">${S[L].sistersBy}</p></div></nav>`;
 
 /* ── Page shell ── */
 function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogType = "article" }) {

@@ -370,6 +370,8 @@ a.sister:hover { background: var(--yellow); color: var(--ink); }
 a.sister:hover span { color: var(--ink); }
 .sister.here { background: var(--ink); color: var(--white); }
 .sister.here span { color: #cbc3b5; }
+.sisters-by { margin-top: 10px; font-size: 13px; color: var(--muted); }
+.sisters-by a { color: var(--ink); }
 @media (max-width: 720px) { .sisters-row { grid-template-columns: minmax(0, 1fr); } }
 
 /* ── Detail panel ── */

@@ -31,6 +31,8 @@ Three bilingual atlases on one Mondrian grid, built the same way: static files w
 | <img src="https://worldlines.geekplux.com/favicon.svg" width="22" alt=""> | [Worldlines · 世界线](https://worldlines.geekplux.com/) · [code](https://github.com/geekplux/worldlines) | 26 countries and 8 regions across 15,000 years, chapter by chapter or one year at a time |
 | <img src="https://dialectica.geekplux.com/favicon.svg" width="22" alt=""> | [Dialectica · 思辨谱](https://dialectica.geekplux.com/) · [code](https://github.com/geekplux/dialectica) | 72 schools and 204 thinkers across 8 traditions: who taught, read and argued with whom |
 
+Made by [GeekPlux](https://geekplux.com/). I built these atlases out of my own curiosity, mainly to learn from them myself.
+
 ## Run it locally
 
 ```sh
