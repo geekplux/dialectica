@@ -20,7 +20,7 @@
       docDesc: () => `A Mondrian-style atlas of philosophy. Follow ${SC.length} schools and ${TK.length} thinkers across ${TR.length} traditions and 3,000 years: where each idea came from, the argument behind it, who taught and who answered whom. In English and Chinese.`,
       brand: "Dialectica", navLineage: "Lineage", navThinkers: "Thinkers", navCrossings: "Crossings", navQuestions: "Questions", navSchools: "Schools", navLearn: "How to read", search: "Search",
       star: "Star", starTitle: "Star Dialectica on GitHub",
-      ariaSisters: "Sister atlases", sistersT: "Three atlases, one grid", sArtisms: "Art-isms", sArtismsD: "40 art styles across 45,000 years", sWorldlines: "Worldlines", sWorldlinesD: "26 countries and 8 regions across 15,000 years", sDialectica: "Dialectica", sDialecticaD: "72 schools and 204 thinkers across 8 traditions",
+      ariaSisters: "Sister atlases", sistersT: "Three atlases, one grid", sArtisms: "Art-isms", sArtismsD: "40 art styles across 45,000 years", sWorldlines: "Worldlines", sWorldlinesD: "26 countries and 8 regions across 15,000 years", sDialectica: "Dialectica", sDialecticaD: "72 schools and 204 thinkers across 8 traditions", sistersBy: "Made by <a href=\"https://geekplux.com/\">GeekPlux</a>. I built these atlases out of my own curiosity, mainly to learn from them myself.",
       kicker: "A family tree of philosophy, East and West",
       h1a: "DIALEC", h1b: "TICA",
       dek: "Every idea is <strong>an answer to an older one</strong>. Follow the arguments: who inherited them, who turned against them, and why.",
@@ -66,7 +66,7 @@
       fImgT: "About the images",
       fImg: "Portraits are the lead images of English Wikipedia articles, shown only when the file is on Wikimedia Commons. Every panel links to its source; check the file page before reusing an image.",
       fProjT: "The project",
-      fProj: "A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href=\"https://artisms.geekplux.org/\">Art-isms</a> and <a href=\"https://worldlines.geekplux.org/\">Worldlines</a>. Corrections are welcome on <a href=\"https://github.com/geekplux/dialectica\">GitHub</a>.",
+      fProj: "A static site with no build step: HTML, CSS and plain JavaScript, with all content in bilingual data files. A sibling of <a href=\"https://artisms.geekplux.com/\">Art-isms</a> and <a href=\"https://worldlines.geekplux.com/\">Worldlines</a>. Corrections are welcome on <a href=\"https://github.com/geekplux/dialectica\">GitHub</a>.",
       consentText: "This site uses Google Analytics to count visits. Allow it to set analytics cookies?", consentYes: "Accept", consentNo: "Decline", cookieSettings: "Cookie settings",
       kSchoolTop: "School · lineage", kThinkerTop: "Thinker · circle",
       question: "The question", origin: "Why it arose", reasoning: "The reasoning", claims: "Key claims", legacy: "What it left",
@@ -90,7 +90,7 @@
       docDesc: () => `蒙德里安风格的哲学图谱。沿着${TR.length}个传统、三千年的时间，追踪${SC.length}个学派与${TK.length}位思想家：每种思想从哪里来、背后的道理是什么、谁师承谁、谁又反驳了谁。中英双语。`,
       brand: "思辨谱", navLineage: "谱系", navThinkers: "思想家", navCrossings: "交汇", navQuestions: "问题", navSchools: "学派", navLearn: "阅读方法", search: "搜索",
       star: "星标", starTitle: "在 GitHub 上给思辨谱加星标",
-      ariaSisters: "姊妹图谱", sistersT: "三部图谱，一张网格", sArtisms: "艺术流派志", sArtismsD: "四万五千年里的40个艺术流派", sWorldlines: "世界线", sWorldlinesD: "一万五千年里的26个国家与8个地区", sDialectica: "思辨谱", sDialecticaD: "8个传统中的72个学派与204位思想家",
+      ariaSisters: "姊妹图谱", sistersT: "三部图谱，一张网格", sArtisms: "艺术流派志", sArtismsD: "四万五千年里的40个艺术流派", sWorldlines: "世界线", sWorldlinesD: "一万五千年里的26个国家与8个地区", sDialectica: "思辨谱", sDialecticaD: "8个传统中的72个学派与204位思想家", sistersBy: "由 <a href=\"https://geekplux.com/\">GeekPlux</a> 制作。出于个人兴趣，我做了这几部图谱，主要是为了自己学习。",
       kicker: "一部东西方哲学的家族谱系",
       h1a: "思辨", h1b: "谱",
       dek: "每一种思想，都是<strong>对更早思想的回答</strong>。沿着论证走下去：谁继承了它，谁反对了它，又是为什么。",
@@ -135,7 +135,7 @@
       fImgT: "关于图片",
       fImg: "人物图像取自英文维基百科条目的首图，且仅在文件位于维基共享资源时显示。每张图都链接到来源页；转载前请先查看文件页的许可信息。",
       fProjT: "关于项目",
-      fProj: "一个无需构建的静态网站：HTML、CSS 与原生 JavaScript，全部内容存放在中英双语数据文件中。它是 <a href=\"https://artisms.geekplux.org/\">艺术流派志</a> 与 <a href=\"https://worldlines.geekplux.org/\">世界线</a> 的姊妹项目。欢迎在 <a href=\"https://github.com/geekplux/dialectica\">GitHub</a> 上提出修订。",
+      fProj: "一个无需构建的静态网站：HTML、CSS 与原生 JavaScript，全部内容存放在中英双语数据文件中。它是 <a href=\"https://artisms.geekplux.com/\">艺术流派志</a> 与 <a href=\"https://worldlines.geekplux.com/\">世界线</a> 的姊妹项目。欢迎在 <a href=\"https://github.com/geekplux/dialectica\">GitHub</a> 上提出修订。",
       consentText: "本站使用 Google Analytics 统计访问量。是否允许设置统计 Cookie？", consentYes: "接受", consentNo: "拒绝", cookieSettings: "Cookie 设置",
       kSchoolTop: "学派 · 谱系", kThinkerTop: "思想家 · 关系",
       question: "它的问题", origin: "为何产生", reasoning: "背后的道理", claims: "核心主张", legacy: "留下了什么",
@@ -288,13 +288,13 @@
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     document.title = t("docTitle");
     $('meta[name="description"]').setAttribute("content", tf("docDesc"));
-    $('link[rel="canonical"]').setAttribute("href", "https://dialectica.geekplux.org/" + (lang === "zh" ? "?lang=zh" : ""));
+    $('link[rel="canonical"]').setAttribute("href", "https://dialectica.geekplux.com/" + (lang === "zh" ? "?lang=zh" : ""));
     $$("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
     $$("[data-i18n-html]").forEach((el) => { el.innerHTML = t(el.dataset.i18nHtml); });
     $$("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
     $$(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
     $("#gh-star").title = t("starTitle");
-    $$("a[data-sister]").forEach((a) => { a.href = `https://${a.dataset.sister}.geekplux.org/${lang === "zh" ? "?lang=zh" : ""}`; });
+    $$("a[data-sister]").forEach((a) => { a.href = `https://${a.dataset.sister}.geekplux.com/${lang === "zh" ? "?lang=zh" : ""}`; });
     $("#stats").textContent = tf("stats");
     $("#search-input").placeholder = t("searchPh");
     $("#lin-range").textContent = tf("linRange");

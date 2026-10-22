@@ -1,7 +1,9 @@
 # Dialectica: working conventions
 
 A static, bilingual (EN/中文) atlas of philosophy: 8 traditions, 72 schools, 204 thinkers, the links between schools
-and the ties between thinkers, drawn as a lineage map, a thinkers' network, a crossings matrix and a questions grid. Repository: github.com/geekplux/dialectica. Sibling projects: Art-isms, Worldlines.
+and the ties between thinkers, drawn as a lineage map, a thinkers' network, a crossings matrix and a questions grid. Repository: github.com/geekplux/dialectica.
+Live: https://dialectica.geekplux.com/ (primary; `dialectica.geekplux.org` is a secondary domain, so canonical, sitemap and
+links always use `.com`). Sibling projects: Art-isms, Worldlines.
 Read README.md for the data model and file layout. These are the rules that are easy to break.
 
 ## No build step
@@ -47,7 +49,7 @@ Read README.md for the data model and file layout. These are the rules that are 
 
 ## Analytics and privacy
 
-- GA4 (`G-1MGF28FKRC`) loads on `dialectica.geekplux.org` only, with Consent Mode v2 defaulting to denied. Keep the
+- GA4 (`G-1MGF28FKRC`) loads on `dialectica.geekplux.com` and `.org` only, with Consent Mode v2 defaulting to denied. Keep the
   hostname guard, keep ads storage denied, keep cookies host-only (`cookie_domain: "none"`), and never send personal
   data or typed search text in event parameters. Page views go through `pageView()` after render; events through
   `track()`, a no-op wherever `gtag` is not defined. Keep the GA4 setting "Page changes based on browser history
