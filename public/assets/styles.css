@@ -40,6 +40,10 @@ a:hover { color: var(--red); }
 button, select, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+/* Skip link: off-screen until focused by keyboard. */
+.skip { position: absolute; left: 12px; top: -200px; z-index: 100; padding: 10px 14px; background: var(--ink); color: var(--white); font-weight: 700; text-decoration: none; }
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 8px); }
+main:focus { outline: none; } /* focused only as the skip-link target */
 .micro, .mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
 .micro { font-size: 11px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 :lang(zh) .micro { letter-spacing: .05em; }
@@ -225,6 +229,7 @@ button { cursor: pointer; }
 /* Schools: the coloured cell is the school's lifetime. If the name needs more room, the block continues in a
    white cell (Mondrian's white: space, not time), so every name sits on its own block */
 .sb { position: absolute; height: 22px; border: 1.5px solid var(--ink); background: var(--white); padding: 0; z-index: 3; text-align: left; transition: opacity .2s, box-shadow .2s, transform .2s var(--ease); }
+.sb::after { content: ""; position: absolute; inset: -3.5px 0; } /* 26px-tall hit area, same look */
 .sb > i { position: absolute; top: 0; bottom: 0; background: var(--tint); border-left: 6px solid var(--c); }
 .sb > span { position: relative; display: block; padding: 0 6px 0 9px; font-size: 12px; font-weight: 700; white-space: nowrap; line-height: 19px; pointer-events: none; }
 .sb:hover, .sb.hot { box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); z-index: 6; }
@@ -233,7 +238,7 @@ button { cursor: pointer; }
 .gx.focus .sb:not(.near):not(.sel), .gx.focus .tn:not(.near):not(.sel) { opacity: .16; }
 
 /* Thinkers: a square at about the age of forty, then the name */
-.tn { position: absolute; height: 20px; display: flex; align-items: center; gap: 6px; padding: 0 4px 0 0; border: 0; background: transparent; font-size: 12px; font-weight: 600; white-space: nowrap; z-index: 3; transition: opacity .2s; line-height: 1; }
+.tn { position: absolute; height: 24px; margin-top: -2px; display: flex; align-items: center; gap: 6px; padding: 0 4px 0 0; border: 0; background: transparent; font-size: 12px; font-weight: 600; white-space: nowrap; z-index: 3; transition: opacity .2s; line-height: 1; }
 .tn::before { content: ""; width: 11px; height: 11px; flex: none; background: var(--c); border: 1.5px solid var(--ink); }
 .tn:hover, .tn.hot { font-weight: 800; z-index: 6; }
 .tn:hover::before, .tn.hot::before { transform: scale(1.3); }
@@ -298,6 +303,7 @@ button { cursor: pointer; }
 .q-map .yr span { position: absolute; top: 6px; transform: translateX(-50%); font: 700 10px/1 var(--f-mono); color: var(--muted); white-space: nowrap; }
 .q-map .yr span.l { transform: none; } .q-map .yr span.r { transform: translateX(-100%); }
 .q-dot { position: absolute; width: 16px; height: 16px; margin: 1px 0 0 -8px; border: 1.5px solid var(--ink); background: var(--c); color: var(--on); font: 700 9px/13px var(--f-mono); text-align: center; padding: 0; z-index: 2; }
+.q-dot::after { content: ""; position: absolute; inset: -2px -5.5px; } /* 24 × 18px hit area (rows are 18px apart), same look */
 .q-dot:hover, .q-dot.hot { transform: scale(1.25); z-index: 3; box-shadow: 2px 2px 0 var(--ink); }
 .q-grid { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); border-top: 2px solid var(--ink); border-bottom: 8px solid var(--ink); background: var(--white); overflow: hidden; }
 .q-grid li { display: flex; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin-right: -1px; margin-bottom: -1px; }

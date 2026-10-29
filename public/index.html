@@ -20,6 +20,7 @@
 <meta property="og:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta property="og:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from, the reasoning behind it, and who answered whom. In English and Chinese.">
 <meta property="og:image" content="https://dialectica.geekplux.com/og.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Dialectica: the title beside a Mondrian-style city of coloured streets, one per tradition of philosophy, crossed by the ideas that passed between them.">
@@ -29,20 +30,35 @@
 <meta name="twitter:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta name="twitter:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from and who answered whom.">
 <meta name="twitter:image" content="https://dialectica.geekplux.com/og.png">
+<meta name="twitter:image:alt" content="Dialectica: the title beside a Mondrian-style city of coloured streets, one per tradition of philosophy, crossed by the ideas that passed between them.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Dialectica",
-  "alternateName": "思辨谱",
-  "url": "https://dialectica.geekplux.com/",
-  "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
-  "inLanguage": ["en", "zh-Hans"],
-  "isAccessibleForFree": true,
-  "about": [{ "@type": "Thing", "name": "Philosophy" }, { "@type": "Thing", "name": "History of ideas" }, { "@type": "Thing", "name": "Comparative philosophy" }],
-  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "creator": { "@type": "Person", "name": "GeekPlux", "url": "https://geekplux.com/", "sameAs": ["https://github.com/geekplux"] },
-  "codeRepository": "https://github.com/geekplux/dialectica"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://dialectica.geekplux.com/#website",
+      "name": "Dialectica",
+      "alternateName": "思辨谱",
+      "url": "https://dialectica.geekplux.com/",
+      "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
+      "inLanguage": ["en", "zh-Hans"],
+      "isAccessibleForFree": true,
+      "about": [{ "@type": "Thing", "name": "Philosophy" }, { "@type": "Thing", "name": "History of ideas" }, { "@type": "Thing", "name": "Comparative philosophy" }],
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "creator": { "@type": "Person", "name": "GeekPlux", "url": "https://geekplux.com/", "sameAs": ["https://github.com/geekplux"] },
+      "codeRepository": "https://github.com/geekplux/dialectica"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dialectica.geekplux.com/#webpage",
+      "url": "https://dialectica.geekplux.com/",
+      "name": "Dialectica: a family tree of philosophy, East and West",
+      "isPartOf": { "@id": "https://dialectica.geekplux.com/#website" },
+      "inLanguage": "en",
+      "primaryImageOfPage": { "@type": "ImageObject", "url": "https://dialectica.geekplux.com/og.png", "width": 1200, "height": 630 }
+    }
+  ]
 }
 </script>
 <script>
@@ -66,9 +82,10 @@
   document.head.appendChild(s);
 })();
 </script>
-<link rel="stylesheet" href="assets/styles.css?v=1edffcc268">
+<link rel="stylesheet" href="assets/styles.css?v=1198460a42">
 </head>
 <body>
+<a class="skip" href="#top" data-i18n="skip">Skip to content</a>
 <header class="topbar">
   <div class="wrap pad">
     <a class="brand" href="#top">
@@ -83,7 +100,7 @@
       <a href="#schools" data-i18n="navSchools">Schools</a>
       <a href="#learn" data-i18n="navLearn">How to read</a>
     </nav>
-    <button type="button" class="search-btn" id="search-open"><span data-i18n="search">Search</span> <kbd>/</kbd></button>
+    <button type="button" class="search-btn" id="search-open" aria-label="Search" data-i18n-aria="search" aria-keyshortcuts="/"><span data-i18n="search">Search</span> <kbd>/</kbd></button>
     <a class="gh-star" id="gh-star" href="https://github.com/geekplux/dialectica" target="_blank" rel="noopener" aria-label="Star Dialectica on GitHub" data-i18n-aria="starTitle" title="Star Dialectica on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span data-i18n="star">Star</span></a>
     <div class="lang" role="group" aria-label="Language" data-i18n-aria="ariaLang">
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -92,7 +109,7 @@
   </div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
   <section class="masthead">
     <div class="hero-copy">
       <p class="eyebrow" data-i18n="kicker">A family tree of philosophy, East and West</p>
@@ -263,6 +280,6 @@
 <script src="data/thinkers.js"></script>
 <script src="data/links.js"></script>
 <script src="data/facts.js"></script>
-<script src="assets/app.js?v=e57502e268"></script>
+<script src="assets/app.js?v=a42f8379cb"></script>
 </body>
 </html>
