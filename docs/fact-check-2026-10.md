@@ -105,3 +105,28 @@ fact-check entry in `public/data/facts.js`.
 | `thinker:voltaire.detail`, `link:empiricism>enlightenment.note` | “Letters on the English (1733)” | “(1733; in French as the Lettres philosophiques, 1734)” / “(1733; French edition 1734)” |
 | `thinker:nishida.detail` | “He died in June 1945, weeks before Japan’s surrender.” | “He died on 7 June 1945, about two months before Japan’s surrender.” |
 | `thinker:barthes.detail` | “He died after being struck by a van in a Paris street.” | “He was struck by a laundry van in a Paris street in February 1980 and died a month later.” |
+
+### Wording and attributions
+
+| Field | Before | After |
+| --- | --- | --- |
+| `school:confucianism.works[0].t` | “Analects” | “Analects (compiled by disciples)” |
+| `school:yogacara.origin` | “in Gandhāra … the brothers Asaṅga and Vasubandhu systematised this insight” | “the half-brothers Asaṅga and Vasubandhu, from Gandhāra, systematised this insight” |
+| `thinker:yi-i.detail` | “After her death, when he was fifteen, he spent about a year in a Buddhist monastery …” | “She died when he was fifteen; after three years of mourning he spent about a year …” |
+| `thinker:nishida.works[1].t.en` | “From the Acting to the Seeing” | “From That Which Acts to That Which Sees” |
+| `thinker:saadia.detail` | “cost him the post for some years before his death in Baghdad in 942” | “cost him the post for some years, though he was reinstated before his death in Baghdad in 942” |
+| `thinker:foot.detail` | “she was an early member of the charity Oxfam” | “from 1948 she was active in the charity Oxfam for the rest of her life” |
+| `link:confucianism>neo-confucianism.note` | “… grouping them with the Analects and the Doctrine of the Mean as the Four Books.” | “… and Zhu Xi grouped them with …” |
+
+### Proposals not applied
+
+Rejected because the audit misread the data: Chinese work titles “missing a year” (the year is one shared field),
+Zhuangzi’s Inner Chapters (290 BCE is before, not after, his death), Duns Scotus’ 《〈箴言集〉评注》 (箴言集 is the
+usual Chinese for Lombard’s Sentences), Śaṅkara’s “older scholarship”, and Rousseau leaving Geneva “at sixteen” (he
+was fifteen in March 1728). Left as they are because both versions are defensible: work years for Gorgias,
+Anaxagoras, the Ācārāṅga, Plotinus’ Enneads, Hegel’s Philosophy of Right, Boethius’ Consolation, al-Ghazālī’s
+Deliverance, Buridan’s Summulae and Aristotle’s Ethics; plotted birth and death years for Jaimini, Vasubandhu,
+Umāsvāti, Patañjali, Kumārila and Gaṅgeśa; the ends of Cārvāka and the start of German idealism; Han Fei’s mission
+in 233 or 234 BCE; Ayer’s chair in 1958 or 1959; Lévi-Strauss in São Paulo; and the notes on Nietzsche’s sister,
+Yājñavalkya, al-Kindī and Fanon. Ties with no note (Locke and Berkeley to Hume, Locke to Rousseau and Montesquieu)
+await notes. Thirty units (ties 12–35 and the seven questions) were not checked before the run stopped.
