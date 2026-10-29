@@ -20,6 +20,7 @@
 <meta property="og:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta property="og:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from, the reasoning behind it, and who answered whom. In English and Chinese.">
 <meta property="og:image" content="https://dialectica.geekplux.com/og.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Dialectica: the title beside a Mondrian-style city of coloured streets, one per tradition of philosophy, crossed by the ideas that passed between them.">
@@ -29,20 +30,35 @@
 <meta name="twitter:title" content="Dialectica: a family tree of philosophy, East and West">
 <meta name="twitter:description" content="72 schools and 204 thinkers across 8 traditions: where each idea came from and who answered whom.">
 <meta name="twitter:image" content="https://dialectica.geekplux.com/og.png">
+<meta name="twitter:image:alt" content="Dialectica: the title beside a Mondrian-style city of coloured streets, one per tradition of philosophy, crossed by the ideas that passed between them.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Dialectica",
-  "alternateName": "思辨谱",
-  "url": "https://dialectica.geekplux.com/",
-  "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
-  "inLanguage": ["en", "zh-Hans"],
-  "isAccessibleForFree": true,
-  "about": [{ "@type": "Thing", "name": "Philosophy" }, { "@type": "Thing", "name": "History of ideas" }, { "@type": "Thing", "name": "Comparative philosophy" }],
-  "license": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "creator": { "@type": "Person", "name": "GeekPlux", "url": "https://geekplux.com/", "sameAs": ["https://github.com/geekplux"] },
-  "codeRepository": "https://github.com/geekplux/dialectica"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://dialectica.geekplux.com/#website",
+      "name": "Dialectica",
+      "alternateName": "思辨谱",
+      "url": "https://dialectica.geekplux.com/",
+      "description": "A bilingual atlas of philosophy: 72 schools and 204 thinkers across 8 traditions, with the lines of influence and argument between them.",
+      "inLanguage": ["en", "zh-Hans"],
+      "isAccessibleForFree": true,
+      "about": [{ "@type": "Thing", "name": "Philosophy" }, { "@type": "Thing", "name": "History of ideas" }, { "@type": "Thing", "name": "Comparative philosophy" }],
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "creator": { "@type": "Person", "name": "GeekPlux", "url": "https://geekplux.com/", "sameAs": ["https://github.com/geekplux"] },
+      "codeRepository": "https://github.com/geekplux/dialectica"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dialectica.geekplux.com/#webpage",
+      "url": "https://dialectica.geekplux.com/",
+      "name": "Dialectica: a family tree of philosophy, East and West",
+      "isPartOf": { "@id": "https://dialectica.geekplux.com/#website" },
+      "inLanguage": "en",
+      "primaryImageOfPage": { "@type": "ImageObject", "url": "https://dialectica.geekplux.com/og.png", "width": 1200, "height": 630 }
+    }
+  ]
 }
 </script>
 <script>

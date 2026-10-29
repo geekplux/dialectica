@@ -16,6 +16,8 @@ import { loadData, SITE, NOW, portraitPath } from "./lib/data.mjs";
 
 const ORIGIN = "https://dialectica.geekplux.com";
 const GA_ID = "G-1MGF28FKRC";
+/* Sitemap <lastmod>: bump when the data or the page copy changes (a constant keeps --check deterministic) */
+const UPDATED = "2026-10-29";
 const D = loadData();
 const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
 const TR = D.traditions, TRB = byId(TR), BRB = byId(D.branches), SCB = byId(D.schools), TKB = byId(D.thinkers);
@@ -81,6 +83,8 @@ const tx = (o, L) => (o ? o[L] ?? o.en : "");
 const pre = (L) => (L === "zh" ? "/zh" : "");
 const home = (L, hash = "") => (L === "zh" ? `/?lang=zh${hash}` : `/${hash}`);
 const href = { school: (L, id) => `${pre(L)}/schools/${id}/`, thinker: (L, id) => `${pre(L)}/thinkers/${id}/` };
+/* Titles: the most informative candidate that fits a search result (60 chars in English, 32 in Chinese) */
+const fit = (L, cands) => cands.find((c) => [...c].length <= (L === "zh" ? 32 : 60)) || cands[cands.length - 1];
 const clip = (s, n = 158) => (s.length <= n ? s : s.slice(0, n - 1).replace(/[\s,;:，；：、]+\S*$/, "") + "…");
 function fmtYear(y, L) {
   if (y < 0) { const n = Math.abs(y).toLocaleString("en-US"); return L === "zh" ? `公元前${n}年` : `${n} BCE`; }
@@ -112,7 +116,7 @@ const sisters = (L) => `<nav class="sisters" aria-label="${esc(S[L].sisters)}"><
   : `<a class="sister" href="https://${s.id}.geekplux.com/${L === "zh" ? "?lang=zh" : ""}">${MARK[s.id]}<b>${esc(s.name[L])}</b><span>${esc(s.line[L])}</span></a>`).join("")}</div><p class="sisters-by">${S[L].sistersBy}</p></div></nav>`;
 
 /* ── Page shell ── */
-function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogType = "article" }) {
+function shell(L, { path, title, description, image, imageSize, imageAlt, jsonld, body, ogType = "article" }) {
   const W = S[L];
   const enPath = L === "zh" ? path.replace(/^\/zh/, "") : path, zhPath = "/zh" + enPath;
   return `<!doctype html>
@@ -137,9 +141,13 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${ORIGIN}${image || "/og.png"}">
+<meta property="og:image:type" content="${image ? "image/webp" : "image/png"}">
+<meta property="og:image:width" content="${image ? imageSize.w : 1200}">
+<meta property="og:image:height" content="${image ? imageSize.h : 630}">
 <meta property="og:image:alt" content="${esc(imageAlt || W.site)}">
 <meta property="og:locale" content="${W.ogLocale}">
 <meta name="twitter:card" content="${image ? "summary" : "summary_large_image"}">
+<meta name="twitter:image:alt" content="${esc(imageAlt || W.site)}">
 <script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, "\\u003c")}</script>
 <script>
 /* Google Analytics 4 with Consent Mode v2, on the production domains only (see index.html); page.js sends the page view */
@@ -245,7 +253,7 @@ function schoolPage(L, s) {
       about: { "@type": "Thing", name: s.name.en, alternateName: s.name.zh, sameAs: wikiUrl(s.wiki) },
       isPartOf: { "@type": "WebSite", name: "Dialectica", url: ORIGIN + "/" }, license: "https://creativecommons.org/licenses/by-sa/4.0/" },
     crumbLd(items)] };
-  return shell(L, { path, title: `${W.schoolTitle(s)} | ${W.site}`, description: clip(`${tx(s.idea, L)} ${tx(s.origin, L)}`), jsonld, body });
+  return shell(L, { path, title: fit(L, [`${W.schoolTitle(s)} | ${W.site}`, (L === "zh" ? `${s.name.zh}（${s.dates.zh}） | ${W.site}` : `${s.name.en} (${s.dates.en}) | ${W.site}`), `${tx(s.name, L)} | ${W.site}`]), description: clip(`${tx(s.idea, L)} ${tx(s.origin, L)}`), jsonld, body });
 }
 
 /* ── Thinker page ── */
@@ -282,9 +290,11 @@ function thinkerPage(L, k) {
   if (k.died && k.died > 0) person.deathDate = String(k.died);
   if (im) person.image = ORIGIN + portraitUrl(k);
   const jsonld = { "@context": "https://schema.org", "@graph": [{ "@type": "ProfilePage", url: ORIGIN + path, inLanguage: L === "zh" ? "zh-Hans" : "en", mainEntity: person }, crumbLd(items)] };
-  const title = L === "zh" ? `${k.name.zh}（${k.life.zh}）：${k.role.zh} | ${W.site}` : `${k.name.en} (${k.life.en}): ${k.role.en} | ${W.site}`;
+  const title = L === "zh"
+    ? fit(L, [`${k.name.zh}（${k.life.zh}）：${k.role.zh} | ${W.site}`, `${k.name.zh}：${k.role.zh} | ${W.site}`, `${k.name.zh}（${k.life.zh}） | ${W.site}`, `${k.name.zh} | ${W.site}`])
+    : fit(L, [`${k.name.en} (${k.life.en}): ${k.role.en} | ${W.site}`, `${k.name.en}: ${k.role.en} | ${W.site}`, `${k.name.en} (${k.life.en}) | ${W.site}`, `${k.name.en} | ${W.site}`]);
   return shell(L, { path, title, description: clip(`${tx(k.idea, L)} ${tx(k.detail, L) || tx(k.role, L)}`.replace(/\n+/g, " ")),
-    image: im ? portraitUrl(k) : null, imageAlt: tx(k.name, L), jsonld, body, ogType: "profile" });
+    image: im ? portraitUrl(k) : null, imageSize: im ? { w: im.w, h: im.h } : null, imageAlt: tx(k.name, L), jsonld, body, ogType: "profile" });
 }
 
 /* ── Hubs ── */
@@ -344,7 +354,7 @@ for (const L of ["en", "zh"]) {
 /* Sitemap: the atlas in both languages, then every generated page with its alternate */
 const enPaths = ["/", ...[...out.keys()].filter((p) => !p.startsWith("zh/")).map((p) => "/" + p.replace(/index\.html$/, ""))];
 const alt = (en) => en === "/" ? ["/", "/?lang=zh"] : [en, "/zh" + en];
-const urlEntry = (loc, [en, zh]) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${en}"/>\n    <xhtml:link rel="alternate" hreflang="zh-Hans" href="${ORIGIN}${zh}"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${en}"/>\n  </url>`;
+const urlEntry = (loc, [en, zh]) => `  <url>\n    <loc>${ORIGIN}${loc}</loc>\n    <lastmod>${UPDATED}</lastmod>\n    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${en}"/>\n    <xhtml:link rel="alternate" hreflang="zh-Hans" href="${ORIGIN}${zh}"/>\n    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${en}"/>\n  </url>`;
 out.set("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated by node scripts/build-pages.mjs. Do not edit by hand. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${enPaths.flatMap((en) => { const a = alt(en); return [urlEntry(a[0], a), urlEntry(a[1], a)]; }).join("\n")}\n</urlset>\n`);
 /* index.html: a static list of every school, inside the index the page redraws, so crawlers can follow it */
 const INDEX = SITE + "index.html";

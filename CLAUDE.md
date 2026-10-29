@@ -2,7 +2,7 @@
 
 A static, bilingual (EN/中文) atlas of philosophy: 8 traditions, 72 schools, 204 thinkers, the links between schools
 and the ties between thinkers, drawn as a lineage map, a thinkers' network, a crossings matrix and a questions grid. Repository: github.com/geekplux/dialectica.
-Live: https://dialectica.geekplux.com/ (primary; `dialectica.geekplux.org` is a secondary domain, so canonical, sitemap and
+Live: https://dialectica.geekplux.com/ (primary; `dialectica.geekplux.org` 301s to it, so canonical, sitemap and
 links always use `.com`). Sibling projects: Art-isms, Worldlines.
 Read README.md for the data model and file layout. These are the rules that are easy to break.
 
@@ -66,7 +66,7 @@ Read README.md for the data model and file layout. These are the rules that are 
 
 1. `node scripts/fetch-portraits.mjs` if any `c` changed (needs network and `cwebp`; it regenerates CREDITS.md).
 2. `node scripts/stamp-assets.mjs` if `public/assets/app.js` or `styles.css` changed.
-3. `node scripts/build-pages.mjs` if the data or the stylesheet changed.
+3. `node scripts/build-pages.mjs` if the data or the stylesheet changed; bump `UPDATED` in it (the sitemap `<lastmod>`) when content changes.
 4. `node scripts/check-data.mjs` (CI runs it too).
 5. Open the page at desktop width and at 390px, in both languages.
 

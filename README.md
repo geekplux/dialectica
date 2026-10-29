@@ -40,7 +40,7 @@ python3 -m http.server 8000 --directory public
 # then visit http://localhost:8000
 ```
 
-`npx wrangler dev` also works. Portraits load from Wikipedia, so they need a connection; without one, each panel shows a Mondrian plate instead.
+`npx wrangler dev` also works. Portraits with a free licence are hosted in `public/images/portraits/`; the rest load from Wikipedia, so they need a connection, and without one each panel shows a Mondrian plate instead.
 
 ## Project structure
 
