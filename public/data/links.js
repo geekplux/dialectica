@@ -464,7 +464,7 @@ window.DIALECTICA.ties = [
   {"from":"rawls","to":"nagel","kind":"taught","note":{"en":"Rawls supervised Nagel’s doctoral thesis at Harvard.","zh":"罗尔斯是内格尔在哈佛的博士论文导师。"}},
   {"from":"putnam","to":"nagel","kind":"opp","note":{"en":"“What Is It Like to Be a Bat?” argues that reductive theories of mind, functionalism included, leave out the subjective point of view.","zh":"《成为一只蝙蝠可能是什么样子？》认为，包括功能主义在内的还原论心灵理论都遗漏了主观视角。"}},
   {"from":"ryle","to":"dennett","kind":"taught","note":{"en":"Dennett wrote his Oxford doctorate under Ryle.","zh":"丹尼特在牛津的博士论文由赖尔指导。"}},
-  {"from":"quine","to":"dennett","kind":"infl","note":{"en":"As a Harvard undergraduate, Dennett was drawn into philosophy by Quine.","zh":"丹尼特在哈佛读本科时，因蒯因而投身哲学。"}},
+  {"from":"quine","to":"dennett","kind":"infl","note":{"en":"Reading Quine as a first-year student at Wesleyan, Dennett transferred to Harvard to study with him.","zh":"丹尼特在卫斯理安大学读一年级时读到蒯因，随即转学哈佛追随他。"}},
   {"from":"searle","to":"dennett","kind":"opp","note":{"en":"Dennett spent decades rebutting the Chinese Room.","zh":"丹尼特用了几十年时间反驳“中文屋”论证。"}},
   {"from":"nagel","to":"chalmers","kind":"infl"},
   {"from":"dennett","to":"chalmers","kind":"opp","note":{"en":"Chalmers argues that Dennett’s account explains the functions of consciousness but not experience itself.","zh":"查默斯认为，丹尼特的理论解释了意识的功能，却没有解释经验本身。"}},

@@ -89,7 +89,7 @@ Object.assign(window.DIALECTICA, {
       ] },
     { id: "live", branch: "ethics",
       q: { en: "How should one live?", zh: "人应当怎样生活？" },
-      lede: { en: "Socrates called it the only question that matters. Every tradition has an answer, and most of them are practices, not just theories.", zh: "苏格拉底说这是唯一要紧的问题。每个传统都有自己的答案，而且大多是一种修习，而不只是理论。" },
+      lede: { en: "Socrates called it the question that matters most. Every tradition has an answer, and most of them are practices, not just theories.", zh: "苏格拉底说这是最要紧的问题。每个传统都有自己的答案，而且大多是一种修习，而不只是理论。" },
       answers: [
         { school: "jainism", by: "mahavira", a: { en: "Harm no living being. Non-violence (ahiṃsā) in deed, word and thought frees the soul.", zh: "不伤害任何生命。身、语、意上的不害（阿希姆萨）使灵魂得到解脱。" } },
         { school: "buddhism", by: "buddha", a: { en: "Follow the Eightfold Path and end the craving that causes suffering.", zh: "修八正道，断除导致苦的渴爱。" } },

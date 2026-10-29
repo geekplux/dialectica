@@ -129,4 +129,33 @@ Deliverance, Buridan’s Summulae and Aristotle’s Ethics; plotted birth and de
 Umāsvāti, Patañjali, Kumārila and Gaṅgeśa; the ends of Cārvāka and the start of German idealism; Han Fei’s mission
 in 233 or 234 BCE; Ayer’s chair in 1958 or 1959; Lévi-Strauss in São Paulo; and the notes on Nietzsche’s sister,
 Yājñavalkya, al-Kindī and Fanon. Ties with no note (Locke and Berkeley to Hume, Locke to Rousseau and Montesquieu)
-await notes. Thirty units (ties 12–35 and the seven questions) were not checked before the run stopped.
+await notes. Thirty units (ties 12–35 and the seven questions) were not checked before the run stopped; see the
+next section.
+
+### Gaps finished with Claude Code (29 October)
+
+The audit run ran out of API credit before it reached ties 12, 13 and 15–35 and the seven questions, and before
+the second-pass re-check of links 06–20 and ties 01, 02 and 04–06. Claude Code (with web search) checked all of
+them: 360 claims in the thirty unchecked units, and the 83 rows the first pass had left uncertain, contested or
+corrected in the nineteen re-check units. Results are in the fact-audit run `2026-10-29T17-15-dx-claudecode`.
+
+| Field | Before | After |
+| --- | --- | --- |
+| `question:live.lede` | “Socrates called it the only question that matters.” | “… the question that matters most.” (Gorgias 500c) |
+| `tie:quine>dennett.note`, `thinker:dennett.detail` | “As a Harvard undergraduate, Dennett was drawn into philosophy by Quine.” | “Reading Quine as a first-year student at Wesleyan, Dennett transferred to Harvard to study with him.” |
+
+Not applied, for the owner to decide (both readings have scholarly support, so a change would take a side):
+
+- `question:real` (Eleatics): “Change and plurality are illusions” is the traditional, strict-monist reading of
+  Parmenides; Owen, Mourelatos and Curd read him otherwise. Possible hedge: “on the traditional reading, …”.
+- `tie:parmenides>gorgias`: whether On Non-Being “parodies” Parmenides or argues in earnest is disputed.
+- `link:renaissance>social-contract`: Hobbes never names Machiavelli; whether Machiavelli “prepared the ground” is
+  argued both ways (Strauss for, others against). The link may need a hedge, or the owner may drop it.
+- `link:buddhism>mimamsa`: Kataoka reads Kumārila as denying only omniscient knowledge of dharma, others as a
+  general denial of omniscience.
+- `tie:hui-shi>gongsun-long`: no source records that they met; the note already calls it a shared line of
+  argument, which sits uneasily with the rule that ties be documented contacts.
+
+Every other row was confirmed, including all three first-pass proposals in the re-check set (Han Fei on Xunzi’s
+“selfish” human nature, Wang Bi on Confucius embodying non-being, and the Four Books note, already fixed).
+
