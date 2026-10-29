@@ -83,7 +83,7 @@
       kSchool: "School", kThinker: "Thinker", kWork: "Work",
       noResults: (q) => `Nothing matches “${q}”. Try a broader idea, a name or a tradition.`,
       close: "Close", zoom: "Zoom", zoomIn: "Zoom in", zoomOut: "Zoom out", now: "today",
-      ariaSections: "Sections", ariaLang: "Language", ariaManifesto: "How to read the atlas", ariaBranches: "Filter by branch", ariaQuestions: "Questions"
+      skip: "Skip to content", ariaSections: "Sections", ariaLang: "Language", ariaManifesto: "How to read the atlas", ariaBranches: "Filter by branch", ariaQuestions: "Questions"
     },
     zh: {
       docTitle: "思辨谱：东西方哲学的家族谱系",
@@ -152,7 +152,7 @@
       kSchool: "学派", kThinker: "思想家", kWork: "著作",
       noResults: (q) => `没有与“${q}”匹配的内容。换一个更宽泛的概念、人名或传统试试。`,
       close: "关闭", zoom: "缩放", zoomIn: "放大", zoomOut: "缩小", now: "今天",
-      ariaSections: "栏目", ariaLang: "语言", ariaManifesto: "如何阅读图谱", ariaBranches: "按分支筛选", ariaQuestions: "问题"
+      skip: "跳到正文", ariaSections: "栏目", ariaLang: "语言", ariaManifesto: "如何阅读图谱", ariaBranches: "按分支筛选", ariaQuestions: "问题"
     }
   };
 
@@ -1005,6 +1005,16 @@
     if (e.key === "Escape") {
       if (search.classList.contains("open")) closeSearch();
       else if (detail.classList.contains("open")) closeDetail();
+      return;
+    }
+    /* Keep Tab inside the open search dialog (it is aria-modal) */
+    if (e.key === "Tab" && search.classList.contains("open")) {
+      const f = [...search.querySelectorAll("input, button, a[href]")].filter((el) => el.offsetParent !== null);
+      if (f.length) {
+        const i = f.indexOf(document.activeElement);
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && (i === -1 || i === f.length - 1)) { e.preventDefault(); f[0].focus(); }
+      }
       return;
     }
     if (search.classList.contains("open")) return;

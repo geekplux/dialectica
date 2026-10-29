@@ -26,7 +26,7 @@ const CSS = `/assets/styles.css?v=${stamp("assets/styles.css")}`, JS = `/assets/
 /* ── Words ── */
 const S = {
   en: {
-    site: "Dialectica", atlas: "Atlas", schools: "Schools", thinkers: "Thinkers", factCheck: "Fact-check", credits: "Image credits",
+    site: "Dialectica", skip: "Skip to content", atlas: "Atlas", schools: "Schools", thinkers: "Thinkers", factCheck: "Fact-check", credits: "Image credits",
     lineage: "Lineage", crossings: "Crossings", questions: "Questions", search: "Open the atlas",
     question: "The question", origin: "Why it arose", reasoning: "The reasoning", claims: "Key claims", legacy: "What it left",
     people: "Thinkers", works: "Key texts", worksOf: "Works", from: "Where it came from", to: "What it led to", answers: "Its answers to the big questions",
@@ -50,7 +50,7 @@ const S = {
     ogLocale: "en_US"
   },
   zh: {
-    site: "思辨谱", atlas: "图谱", schools: "学派", thinkers: "思想家", factCheck: "史实核对", credits: "图片来源",
+    site: "思辨谱", skip: "跳到正文", atlas: "图谱", schools: "学派", thinkers: "思想家", factCheck: "史实核对", credits: "图片来源",
     lineage: "谱系", crossings: "交汇", questions: "问题", search: "打开图谱",
     question: "它的问题", origin: "为何产生", reasoning: "背后的道理", claims: "核心主张", legacy: "留下了什么",
     people: "代表人物", works: "代表著作", worksOf: "著作", from: "从哪里来", to: "通向哪里", answers: "它对几个大问题的回答",
@@ -162,6 +162,7 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
 <link rel="stylesheet" href="${CSS}">
 </head>
 <body class="page">
+<a class="skip" href="#main">${esc(W.skip)}</a>
 <header class="topbar">
   <div class="wrap pad">
     <a class="brand" href="${home(L)}"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" fill="#141414"/><rect x="2" y="2" width="10" height="13" fill="#d52b1e"/><rect x="14" y="2" width="10" height="6" fill="#fffdf7"/><rect x="14" y="10" width="10" height="14" fill="#1d4ed8"/><rect x="2" y="17" width="10" height="7" fill="#f3c623"/></svg><span>${esc(W.site)}</span></a>
@@ -178,7 +179,7 @@ function shell(L, { path, title, description, image, imageAlt, jsonld, body, ogT
     </div>
   </div>
 </header>
-<main class="article">
+<main class="article" id="main" tabindex="-1">
 ${body}
 </main>
 <footer>
