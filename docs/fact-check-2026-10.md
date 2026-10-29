@@ -83,3 +83,25 @@ Checks: 107 (52 confirmed, 23 corrected, 25 contested, 7 uncertain).
 - `thinker:ayer`: The book is Ayer’s 1956 study of scepticism, perception, memory and other minds. No published Chinese translation could be found, so 《知识问题》 remains a descriptive rendering of the title, not the name of an edition.
 - `thinker:ryle`: Dilemmas collects Ryle’s Tarner Lectures on apparent conflicts between theories. No published Chinese translation could be found, so 《两难》 remains a descriptive rendering of the title.
 - `tie:hui-shi>gongsun-long`: Both are counted among the disputers (bianzhe) and the later tradition groups them as the School of Names, but no source records that they met or that Gongsun Long learned from Hui Shi. The tie marks a shared line of argument, not a documented contact.
+
+## Full audit, 29 October 2026
+
+A second, automated pass checked every claim in the data (3,576 claims in 309 of 339 units; a first pass with a fast
+model, then a stronger model on every flagged claim). Only corrections that were clear and sourced were applied; the
+full review, with the proposals that were rejected or left open, is kept outside the repo. Each change below has a
+fact-check entry in `public/data/facts.js`.
+
+### Dates and years
+
+| Field | Before | After |
+| --- | --- | --- |
+| `school:eleatic.works[1]`, `thinker:zeno-elea.works[0]` | “Paradoxes (book lost; reported by Aristotle)”, 460 BCE | “… reported by Aristotle and Simplicius”, no year |
+| `school:atomism.works[1].y`, `thinker:democritus.works[0].y` | −400 | null |
+| `thinker:dong-zhongshu.works[0].y` | −110 | null |
+| `thinker:xunzi.life` | “c. 310–235 BCE” | “c. 310 – after 238 BCE” |
+| `school:kalam.origin` | “the Abbasid inquisition (833–848)” | “(833–c. 848)” |
+| `school:early-analytic.origin` | “Around 1900 in Cambridge, Russell and Moore broke with …” | “From 1898 in Cambridge …” |
+| `thinker:anaxagoras.detail` | “around 460 BCE settled in Athens” | “settled in Athens, perhaps around 460 BCE (the date is disputed)” |
+| `thinker:voltaire.detail`, `link:empiricism>enlightenment.note` | “Letters on the English (1733)” | “(1733; in French as the Lettres philosophiques, 1734)” / “(1733; French edition 1734)” |
+| `thinker:nishida.detail` | “He died in June 1945, weeks before Japan’s surrender.” | “He died on 7 June 1945, about two months before Japan’s surrender.” |
+| `thinker:barthes.detail` | “He died after being struck by a van in a Paris street.” | “He was struck by a laundry van in a Paris street in February 1980 and died a month later.” |
